@@ -1,0 +1,4 @@
+language: groovy
+
+after_success:
+- ./gradlew jacocoTestReport coveralls

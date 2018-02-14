@@ -2,6 +2,7 @@ apply plugin: 'com.gradle.plugin-publish'
 apply plugin: 'idea'
 apply plugin: 'groovy'
 apply plugin: 'jacoco'
+apply plugin: 'codenarc'
 apply plugin: 'com.github.kt3k.coveralls'
 
 buildscript {
@@ -18,6 +19,11 @@ buildscript {
 
 repositories {
     mavenCentral()
+}
+
+codenarc {
+    toolVersion = "$codenarcVersion"
+    ignoreFailures = false
 }
 
 jacocoTestReport {
@@ -51,7 +57,7 @@ idea {
     module {
         //add integration test source dirs to IDEA
         testSourceDirs += [file('src/integTest/groovy'), file('src/integTest/resources')]
-        scopes.TEST.plus += [ configurations.integTestCompile, configurations.integTestRuntime ]
+        scopes.TEST.plus += [configurations.integTestCompile, configurations.integTestRuntime]
     }
 }
 

@@ -2,6 +2,7 @@ package com.github.zhurlik.task
 
 import org.gradle.api.Project
 import org.gradle.internal.impldep.org.codehaus.plexus.interpolation.os.Os
+import org.gradle.internal.os.OperatingSystem
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Before
 import org.junit.Test
@@ -39,7 +40,7 @@ class AbstractInstallTest {
 
     @Test
     void testArch() {
-        assertTrue(task.is64())
+        assertEquals(!OperatingSystem.current().nativePrefix.contains('32'), task.is64())
     }
 
     @Test

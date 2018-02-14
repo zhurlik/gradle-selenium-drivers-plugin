@@ -29,6 +29,38 @@ jacocoTestReport {
 
 group = 'com.github.zhurlik'
 
+configurations {
+    integTestCompile.extendsFrom testCompile
+    integTestRuntime.extendsFrom testRuntime
+}
+
+// Integration tests
+sourceSets {
+    integTest {
+        groovy {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integTest/groovy')
+        }
+
+        resources.srcDir file('src/integTest/resources')
+    }
+}
+
+idea {
+    module {
+        //add integration test source dirs to IDEA
+        testSourceDirs += [file('src/integTest/groovy'), file('src/integTest/resources')]
+        scopes.TEST.plus += [ configurations.integTestCompile, configurations.integTestRuntime ]
+    }
+}
+
+task integTest(type: Test) {
+    testClassesDirs = sourceSets.integTest.output.classesDirs
+    classpath = sourceSets.integTest.runtimeClasspath
+}
+// Integration tests
+
 dependencies {
     compile gradleApi()
     compile localGroovy()

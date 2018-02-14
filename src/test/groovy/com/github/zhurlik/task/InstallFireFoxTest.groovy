@@ -56,4 +56,18 @@ class InstallFireFoxTest {
             task.apply()
         }
     }
+
+    @Test
+    void testApplyUseSkipDownloading() {
+        task.browserVersion = 'fake'
+        project.copy {
+                from InstallFireFoxTest.getClassLoader().getResource('firefox-fake.tar.bz2').path
+                into task.temporaryDir.path
+        }
+
+        if (task.isLinux()) {
+            task.apply()
+        }
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.github.zhurlik.task
 
+import com.github.zhurlik.domain.Browsers
 import org.gradle.api.tasks.TaskAction
 
 import java.nio.file.Paths
@@ -10,6 +11,10 @@ import java.nio.file.Paths
  * @author zhurlik@gmail.com
  */
 class InstallFireFox extends AbstractInstall {
+
+    InstallFireFox() {
+        browser = Browsers.FIREFOX
+    }
 
     @TaskAction
     void apply() {

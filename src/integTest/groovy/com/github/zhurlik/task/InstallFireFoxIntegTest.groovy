@@ -1,6 +1,5 @@
 package com.github.zhurlik.task
 
-import com.github.zhurlik.domain.Browsers
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
@@ -26,7 +25,6 @@ class InstallFireFoxIntegTest {
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
         project.task(type: InstallFireFox, 'installFireFox', {
-            browser = Browsers.FIREFOX
             browserVersion '58.0.2'
         })
 

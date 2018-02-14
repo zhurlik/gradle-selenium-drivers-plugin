@@ -14,7 +14,7 @@ import java.nio.file.Paths
  *
  * @author zhurlik@gmail.com
  */
-class InstallFireFoxTest {
+class InstallFireFoxIntegTest {
     @Test
     void testFirefox() {
         final Path projectPath = Paths.get(Thread.currentThread().getContextClassLoader().getResource('').path, 'test-firefox')

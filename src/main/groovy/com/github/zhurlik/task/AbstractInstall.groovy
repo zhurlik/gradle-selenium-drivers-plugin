@@ -18,23 +18,25 @@ abstract class AbstractInstall extends DefaultTask {
     Browsers browser
 
     /**
+     * Checks that current OS is Linux.
      *
-     * @return
+     * @return true when OS is Linux
      */
     protected boolean isLinux() {
         return OperatingSystem.current().isLinux()
     }
 
     /**
+     * Checks that current OS is Windows.
      *
-     * @return
+     * @return true when OS is Windows
      */
     protected boolean isWindows() {
         return OperatingSystem.current().isWindows()
     }
 
     /**
-     *
+     * Prints browser name and version.
      */
     protected void info() {
         logger.quiet("Browser: $browser")
@@ -42,8 +44,9 @@ abstract class AbstractInstall extends DefaultTask {
     }
 
     /**
+     *  Is 64 or 32 bit system.
      *
-     * @return
+     * @return true when 64 bit system
      */
     protected boolean is64() {
         return OperatingSystem.current().getNativePrefix().contains('64')

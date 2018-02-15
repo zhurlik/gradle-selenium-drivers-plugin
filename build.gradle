@@ -39,7 +39,7 @@ jacocoTestReport {
 
 test {
     jacoco {
-        excludes += ['**/*onWindows*']
+        excludes += ['**/*_onWindows_closure*', '**/*_checkChoco_closure*']
     }
 }
 

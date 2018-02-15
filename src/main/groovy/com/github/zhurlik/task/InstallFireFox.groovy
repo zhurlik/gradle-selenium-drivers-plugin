@@ -1,7 +1,9 @@
 package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
+import org.gradle.api.GradleException
 import org.gradle.api.tasks.TaskAction
+import org.gradle.process.ExecResult
 
 import java.nio.file.Paths
 
@@ -20,8 +22,47 @@ class InstallFireFox extends AbstractInstall {
     void apply() {
         logger.quiet('Installing...')
         info()
+        // unzip
+        onLinux()
+        // via chocolatey
+        onWindows()
+    }
 
-        if(isLinux()) {
+    /**
+     * Installing FireFox on Windows via choco.
+     * See https://chocolatey.org/docs/commandsinstall.
+     */
+    private void onWindows() {
+        if (isWindows()) {
+            //choco install firefox --version 58.0.2 -my
+            try {
+                new ByteArrayOutputStream().withCloseable { out ->
+                    ExecResult res = project.exec {
+                        commandLine 'cmd', '/c', "choco install firefox --version ${browserVersion} -my"
+                        standardOutput = out
+                        ignoreExitValue = true
+                    }
+
+                    final String log = out.toString()
+                    if (res.exitValue == 0) { // success
+                        logger.quiet("FireFox has been installed")
+                        logger.debug("Intsallation log: $log")
+                    } else { // failure
+                        logger.error("A problem during installation: $log")
+                        res.rethrowFailure()
+                    }
+                }
+            } catch (Exception ex) {
+                throw new GradleException('FireFox is not installed:', ex)
+            }
+        }
+    }
+
+    /**
+     * Usual installation for Linux.
+     */
+    private void onLinux() {
+        if (isLinux()) {
             ant.get(src: getUrl(),
                     dest: temporaryDir.path,
                     skipexisting: true,
@@ -33,11 +74,6 @@ class InstallFireFox extends AbstractInstall {
                 from project.tarTree(project.resources.bzip2("${temporaryDir.path}/$filename"))
                 into "${project.buildDir}/browser/$browser/$browserVersion"
             }
-        }
-
-        // TODO: via chocolatey
-        if (isWindows()) {
-            throw new UnsupportedOperationException()
         }
     }
 

@@ -17,17 +17,19 @@ We are planning to support the following OS:
 ## Browsers
 Here is a matrix to understand what we are using for downloading distributive    
 * FireFox    
-  - Windows - choco
+  - Windows - [FireFox on chocolatey.org](https://chocolatey.org/packages/Firefox)
   - Linux - [FireFox Releases](https://ftp.mozilla.org/pub/firefox/releases/)
   - Mac - not yet
 * Chrome
-  - Windows - choco
+  - Windows - [GoogleChrome on chocolatey.org](https://chocolatey.org/packages/GoogleChrome)
   - open question
 * PhantomJs
   - [bitbucket](https://bitbucket.org/ariya/phantomjs/downloads/)
   - [github](https://github.com/ariya/phantomjs/releases/)
   - [Google Code](https://code.google.com/archive/p/phantomjs/downloads)
+  - Windows - [PhantomJS on chocolatey.org](https://chocolatey.org/packages/PhantomJS)
 * IE
+  - Windows - [IE11 on chocolatey.org](https://chocolatey.org/packages/ie11)
 * Edge
 * Safari    
 

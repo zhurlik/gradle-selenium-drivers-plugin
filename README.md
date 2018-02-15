@@ -15,8 +15,21 @@ We are planning to support the following OS:
 3. Mac (not implemented yet)
 
 ## Browsers
-
-* FireFox
+Here is a matrix to understand what we are using for downloading distributive    
+* FireFox    
+  - Windows - choco
+  - Linux - [FireFox Releases](https://ftp.mozilla.org/pub/firefox/releases/)
+  - Mac - not yet
+* Chrome
+  - Windows - choco
+  - open question
+* PhantomJs
+  - [bitbucket](https://bitbucket.org/ariya/phantomjs/downloads/)
+  - [github](https://github.com/ariya/phantomjs/releases/)
+  - [Google Code](https://code.google.com/archive/p/phantomjs/downloads)
+* IE
+* Edge
+* Safari    
 
 ## Selenium-WebDriver’s Drivers
 

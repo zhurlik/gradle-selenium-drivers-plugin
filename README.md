@@ -5,7 +5,7 @@ This is a gradle plugin to be able to install Selenium WebDrivers and browsers f
 [![Coverage Status](https://coveralls.io/repos/github/zhurlik/gradle-selenium-drivers-plugin/badge.svg?branch=master)](https://coveralls.io/repos/github/zhurlik/gradle-selenium-drivers-plugin)    
 
 ## Problem
-Usually you need setup a browser for corresponded WebDriver during developing your tests based on Selenium.
+Usually you need to setup a browser for corresponded WebDriver during developing your tests based on Selenium.
 This plugin is going to help with installation. 
 
 ## Opration Systems
@@ -36,5 +36,5 @@ Here is a matrix to understand what we are using for downloading distributive
 ## Selenium-WebDriver’s Drivers
 
 ## How to use
-TODO: make more samples
+TODO: make more examples
 

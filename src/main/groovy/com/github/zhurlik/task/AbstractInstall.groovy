@@ -11,11 +11,18 @@ import org.gradle.internal.os.OperatingSystem
  * @author zhurlik@gmail.com
  */
 abstract class AbstractInstall extends DefaultTask {
+
     @Input
     String browserVersion
 
     @Input
     Browsers browser
+
+    /**
+     * Optional to be able to specify own actions for installing.
+     */
+    Closure linuxInstaller
+    Closure windowsInstaller
 
     /**
      * Checks that current OS is Linux.
@@ -39,8 +46,7 @@ abstract class AbstractInstall extends DefaultTask {
      * Prints browser name and version.
      */
     protected void info() {
-        logger.quiet("Browser: $browser")
-        logger.quiet("Version: $browserVersion")
+        logger.quiet("Browser: ${browser.toString().toLowerCase()} $browserVersion")
     }
 
     /**

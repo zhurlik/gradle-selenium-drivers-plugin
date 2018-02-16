@@ -48,26 +48,26 @@ class InstallFireFoxTest {
 
     @Test
     void testApply() {
-        thrown.expect(BuildException)
-        thrown.expectMessage(StringContains.containsString('Can\'t get ' +
-                'https://ftp.mozilla.org/pub/firefox/releases/bad/linux-x86_64/en-US/firefox-bad.tar.bz2 '))
-        task.browserVersion = 'bad'
         if (task.isLinux()) {
+            thrown.expect(BuildException)
+            thrown.expectMessage(StringContains.containsString('Can\'t get ' +
+                    'https://ftp.mozilla.org/pub/firefox/releases/bad/linux-x86_64/en-US/firefox-bad.tar.bz2 '))
+            task.browserVersion = 'bad'
+
             task.apply()
         }
     }
 
     @Test
     void testApplyUseSkipDownloading() {
-        task.browserVersion = 'fake'
-        project.copy {
+        if (task.isLinux()) {
+            task.browserVersion = 'fake'
+            project.copy {
                 from InstallFireFoxTest.getClassLoader().getResource('firefox-fake.tar.bz2').path
                 into task.temporaryDir.path
-        }
+            }
 
-        if (task.isLinux()) {
             task.apply()
         }
     }
-
 }

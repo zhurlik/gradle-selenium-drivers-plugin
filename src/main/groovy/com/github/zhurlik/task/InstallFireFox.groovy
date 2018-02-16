@@ -34,27 +34,29 @@ class InstallFireFox extends AbstractInstall {
      */
     private void onWindows() {
         if (isWindows()) {
-            //choco install firefox --version 58.0.2 -my
-            try {
-                new ByteArrayOutputStream().withCloseable { out ->
-                    ExecResult res = project.exec {
-                        commandLine 'cmd', '/c', "choco install firefox --version ${browserVersion} -my"
-                        standardOutput = out
-                        ignoreExitValue = true
-                    }
+            Optional.ofNullable(windowsInstaller).orElse {
+                //choco install firefox --version 58.0.2 -my
+                try {
+                    new ByteArrayOutputStream().withCloseable { out ->
+                        ExecResult res = project.exec {
+                            commandLine 'cmd', '/c', "choco install firefox --version ${browserVersion} -my"
+                            standardOutput = out
+                            ignoreExitValue = true
+                        }
 
-                    final String log = out.toString()
-                    if (res.exitValue == 0) { // success
-                        logger.quiet("FireFox has been installed")
-                        logger.debug("Intsallation log: $log")
-                    } else { // failure
-                        logger.error("A problem during installation: $log")
-                        res.rethrowFailure()
+                        final String log = out.toString()
+                        if (res.exitValue == 0) { // success
+                            logger.quiet("FireFox has been installed")
+                            logger.debug("Intsallation log: $log")
+                        } else { // failure
+                            logger.error("A problem during installation: $log")
+                            res.rethrowFailure()
+                        }
                     }
+                } catch (Exception ex) {
+                    throw new GradleException('FireFox is not installed:', ex)
                 }
-            } catch (Exception ex) {
-                throw new GradleException('FireFox is not installed:', ex)
-            }
+            }()
         }
     }
 
@@ -63,17 +65,24 @@ class InstallFireFox extends AbstractInstall {
      */
     private void onLinux() {
         if (isLinux()) {
-            ant.get(src: getUrl(),
-                    dest: temporaryDir.path,
-                    skipexisting: true,
-                    verbose: true
-            )
+            Optional.ofNullable(linuxInstaller).orElse {
+                ant.get(src: getUrl(),
+                        dest: temporaryDir.path,
+                        skipexisting: true,
+                        verbose: true
+                )
 
-            String filename = Paths.get(new URI(url).getPath()).getFileName().toString()
-            project.copy {
-                from project.tarTree(project.resources.bzip2("${temporaryDir.path}/$filename"))
-                into "${project.buildDir}/browser/$browser/$browserVersion"
-            }
+                final String filename = Paths.get(new URI(url).getPath()).getFileName().toString()
+                final String archive = "${temporaryDir.path}/$filename"
+                logger.debug("Downloaded: $archive")
+                final String target = "${project.buildDir}/browser/$browser/$browserVersion"
+                project.copy {
+                    from project.tarTree(project.resources.bzip2(archive))
+                    into target
+                }
+                logger.quiet("FireFox has been installed")
+                logger.debug("Installed to: $target")
+            }()
         }
     }
 

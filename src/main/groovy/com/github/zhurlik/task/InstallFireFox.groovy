@@ -1,9 +1,6 @@
 package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
-import org.gradle.api.GradleException
-import org.gradle.api.tasks.TaskAction
-import org.gradle.process.ExecResult
 
 import java.nio.file.Paths
 
@@ -18,52 +15,22 @@ class InstallFireFox extends AbstractInstall {
         browser = Browsers.FIREFOX
     }
 
-    @TaskAction
-    void apply() {
-        logger.quiet('Installing...')
-        info()
-        // unzip
-        onLinux()
-        // via chocolatey
-        onWindows()
-    }
-
     /**
      * Installing FireFox on Windows via choco.
-     * See https://chocolatey.org/docs/commandsinstall.
      */
-    private void onWindows() {
+    @Override
+    void onWindows() {
         if (isWindows()) {
-            Optional.ofNullable(windowsInstaller).orElse {
-                //choco install firefox --version 58.0.2 -my
-                try {
-                    new ByteArrayOutputStream().withCloseable { out ->
-                        ExecResult res = project.exec {
-                            commandLine 'cmd', '/c', "choco install firefox --version ${browserVersion} -my"
-                            standardOutput = out
-                            ignoreExitValue = true
-                        }
-
-                        final String log = out.toString()
-                        if (res.exitValue == 0) { // success
-                            logger.quiet("FireFox has been installed")
-                            logger.debug("Intsallation log: $log")
-                        } else { // failure
-                            logger.error("A problem during installation: $log")
-                            res.rethrowFailure()
-                        }
-                    }
-                } catch (Exception ex) {
-                    throw new GradleException('FireFox is not installed:', ex)
-                }
-            }()
+            //choco install firefox --version 58.0.2 -my
+            choco('firefox')
         }
     }
 
     /**
      * Usual installation for Linux.
      */
-    private void onLinux() {
+    @Override
+    void onLinux() {
         if (isLinux()) {
             Optional.ofNullable(linuxInstaller).orElse {
                 ant.get(src: getUrl(),

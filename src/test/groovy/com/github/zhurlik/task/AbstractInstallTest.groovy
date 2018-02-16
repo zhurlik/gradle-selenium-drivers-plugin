@@ -47,5 +47,15 @@ class AbstractInstallTest {
         task.info()
     }
 
-    private static class TestTask extends AbstractInstall{}
+    private static class TestTask extends AbstractInstall{
+        @Override
+        protected void onLinux() {
+
+        }
+
+        @Override
+        protected void onWindows() {
+
+        }
+    }
 }

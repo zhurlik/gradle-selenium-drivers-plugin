@@ -1,5 +1,7 @@
 package com.github.zhurlik.task
 
+import com.github.zhurlik.domain.Browsers
+import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.internal.impldep.org.codehaus.plexus.interpolation.os.Os
 import org.gradle.internal.os.OperatingSystem
@@ -45,6 +47,17 @@ class AbstractInstallTest {
     @Test
     void testInfo() {
         task.info()
+    }
+
+    @Test
+    void testInstall() {
+        task.install()
+    }
+
+    @Test(expected = GradleException)
+    void testChoco() {
+        task.browser = Browsers.CHROME
+        task.choco('test-package')
     }
 
     private static class TestTask extends AbstractInstall{

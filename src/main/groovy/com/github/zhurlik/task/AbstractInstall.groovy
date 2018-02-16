@@ -100,8 +100,8 @@ abstract class AbstractInstall extends DefaultTask {
 
     protected void install() {
         info()
-        onLinux()
         onWindows()
+        onLinux()
     }
 
     protected abstract void onLinux()

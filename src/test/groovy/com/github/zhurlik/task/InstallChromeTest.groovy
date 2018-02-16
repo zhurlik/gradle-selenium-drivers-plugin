@@ -1,7 +1,6 @@
 package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
-import org.apache.tools.ant.BuildException
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder

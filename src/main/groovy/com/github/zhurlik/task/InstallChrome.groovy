@@ -63,6 +63,6 @@ class InstallChrome extends AbstractInstall {
      */
     String getUrl() {
         final String platform = "${is64() ? 'linux-x86_64' : 'linux-i686'}"
-        return "https://ftp.mozilla.org/pub/firefox/releases/$browserVersion/$platform/en-US/firefox-${browserVersion}.tar.bz2"
+        return "not yet"
     }
 }

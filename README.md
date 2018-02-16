@@ -8,8 +8,7 @@ This is a gradle plugin to be able to install Selenium WebDrivers and browsers f
 Usually you need to setup a browser for corresponded WebDriver during developing your tests based on Selenium.
 This plugin is going to help with installation. 
 
-## Opration Systems
-We are planning to support the following OS:
+## Supported Operation Systems
 1. Windows (requires [chocolatey.org](https://chocolatey.org/docs/installation) and Admin privileges)
 2. Linux (unzipping)
 3. Mac (not implemented yet)
@@ -31,9 +30,11 @@ Here is a matrix to understand what we are using for downloading distributive
 * IE
   - Windows - [IE11 on chocolatey.org](https://chocolatey.org/packages/ie11)
 * Edge
-* Safari    
-
-## Selenium-WebDriver’s Drivers
+* Opera
+  - Linux - not yet
+  - Windows - [Opera on chocolatey.org](https://chocolatey.org/packages/opera)
+* Safari
+  - not yet    
 
 ## How to use
 TODO: make more examples

@@ -31,38 +31,5 @@ class InstallChrome extends AbstractInstall {
     @Override
     void onLinux() {
         throw new GradleException('Not implemented yet')
-//        if (isLinux()) {
-//            Optional.ofNullable(linuxInstaller).orElse {
-//                ant.get(src: getUrl(),
-//                        dest: temporaryDir.path,
-//                        skipexisting: true,
-//                        verbose: true
-//                )
-//
-//                final String filename = Paths.get(new URI(url).getPath()).getFileName().toString()
-//                final String archive = "${temporaryDir.path}/$filename"
-//                logger.debug("Downloaded: $archive")
-//                final String target = "${project.buildDir}/browser/$browser/$browserVersion"
-//                project.copy {
-//                    from project.tarTree(project.resources.bzip2(archive))
-//                    into target
-//                }
-//                logger.quiet("FireFox has been installed")
-//                logger.debug("Installed to: $target")
-//            }()
-//        }
-    }
-
-    /**
-     * Returns url for downloading the corresponded version.
-     * For example:
-     *      https://ftp.mozilla.org/pub/firefox/releases/58.0.2/linux-x86_64/en-US/firefox-58.0.2.tar.bz2
-     *      https://ftp.mozilla.org/pub/firefox/releases/58.0.2/linux-i686/en-US/firefox-58.0.2.tar.bz2
-     *
-     * @return url
-     */
-    String getUrl() {
-        final String platform = "${is64() ? 'linux-x86_64' : 'linux-i686'}"
-        return "not yet"
     }
 }

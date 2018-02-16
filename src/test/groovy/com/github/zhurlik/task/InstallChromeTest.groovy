@@ -37,11 +37,6 @@ class InstallChromeTest {
     }
 
     @Test
-    void testUrl() {
-        assertEquals('not yet', task.getUrl())
-    }
-
-    @Test
     void testApply() {
         if (task.isLinux()) {
             thrown.expect(GradleException)

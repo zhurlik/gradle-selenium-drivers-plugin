@@ -1,7 +1,7 @@
 package com.github.zhurlik.task
 
+import com.github.zhurlik.Basic
 import org.gradle.api.Project
-import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
 
@@ -13,7 +13,7 @@ import java.nio.file.Paths
  *
  * @author zhurlik@gmail.com
  */
-class InstallFireFoxIntegTest {
+class InstallFireFoxIntegTest extends Basic {
     @Test
     void testFirefox() {
         final Path projectPath = Paths.get(Thread.currentThread().getContextClassLoader().getResource('').path, 'test-firefox')
@@ -29,18 +29,5 @@ class InstallFireFoxIntegTest {
         })
 
         executeTask(project.tasks['installFireFox'])
-    }
-
-    /**
-     * To be able to execute a gradle task.
-     *
-     * @param task
-     */
-    private void executeTask(final Task task) {
-        task.taskDependencies.getDependencies(task).each {
-            subTask -> executeTask(subTask)
-        }
-
-        task.execute()
     }
 }

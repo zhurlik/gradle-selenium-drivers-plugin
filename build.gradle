@@ -82,4 +82,6 @@ dependencies {
     compile localGroovy()
 
     testCompile group: 'junit', name: 'junit', version: "$junitVersion"
+
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.9.1'
 }

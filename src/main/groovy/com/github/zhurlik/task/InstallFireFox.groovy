@@ -47,7 +47,7 @@ class InstallFireFox extends AbstractInstall {
                     from project.tarTree(project.resources.bzip2(archive))
                     into target
                 }
-                logger.quiet("FireFox has been installed")
+                logger.quiet("$browser has been installed")
                 logger.debug("Installed to: $target")
             }()
         }

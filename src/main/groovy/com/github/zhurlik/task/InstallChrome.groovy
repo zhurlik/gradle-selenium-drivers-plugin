@@ -1,6 +1,7 @@
 package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
+import com.github.zhurlik.domain.Drivers
 import org.gradle.api.GradleException
 
 /**
@@ -12,6 +13,7 @@ class InstallChrome extends AbstractInstall {
 
     InstallChrome() {
         browser = Browsers.CHROME
+        driver = Drivers.UNKNOWN
     }
 
     /**

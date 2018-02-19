@@ -1,6 +1,7 @@
 package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
+import com.github.zhurlik.domain.Drivers
 import org.apache.tools.ant.BuildException
 
 import java.nio.file.Paths
@@ -14,6 +15,7 @@ class InstallPhantomJs extends AbstractInstall {
 
     InstallPhantomJs() {
         browser = Browsers.PHANTOMJS
+        driver = Drivers.UNKNOWN
     }
 
     /**

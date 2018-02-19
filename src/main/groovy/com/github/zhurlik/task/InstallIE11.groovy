@@ -1,6 +1,7 @@
 package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
+import com.github.zhurlik.domain.Drivers
 
 /**
  * A task for installing Internet Explorer 11 browser.
@@ -11,6 +12,7 @@ class InstallIE11 extends AbstractInstall {
 
     InstallIE11() {
         browser = Browsers.IE
+        driver = Drivers.UNKNOWN
     }
 
     /**

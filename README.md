@@ -13,9 +13,9 @@ This plugin is going to help with installation.
 2. Linux (unzipping)
 3. Mac (not implemented yet)
 
-## Browsers
+## Browsers and WebDrivers
 Here is a matrix to understand what we are using for downloading distributive    
-* FireFox    
+* FireFox&Gecko    
   - Windows - [FireFox on chocolatey.org](https://chocolatey.org/packages/Firefox)
   - Linux - [FireFox Releases](https://ftp.mozilla.org/pub/firefox/releases/)
   - Mac - not yet

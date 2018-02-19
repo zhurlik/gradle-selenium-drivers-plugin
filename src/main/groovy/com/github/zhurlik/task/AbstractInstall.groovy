@@ -1,6 +1,7 @@
 package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
+import com.github.zhurlik.domain.Drivers
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input
@@ -20,6 +21,12 @@ abstract class AbstractInstall extends DefaultTask {
 
     @Input
     Browsers browser
+
+    @Input
+    Drivers driver
+
+    @Input
+    String driverVersion
 
     /**
      * Optional to be able to specify own actions for installing.

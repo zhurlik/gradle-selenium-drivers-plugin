@@ -6,5 +6,6 @@ package com.github.zhurlik.domain
  * @author zhurlik@gmail.com
  */
 enum Drivers {
-    GECKO
+    GECKO,
+    UNKNOWN
 }

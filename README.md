@@ -24,7 +24,6 @@ Here is a matrix to understand what we are using for downloading distributive
   - open question
 * PhantomJs
   - [bitbucket](https://bitbucket.org/ariya/phantomjs/downloads/)
-  - [github](https://github.com/ariya/phantomjs/releases/)
   - [Google Code](https://code.google.com/archive/p/phantomjs/downloads)
   - Windows - [PhantomJS on chocolatey.org](https://chocolatey.org/packages/PhantomJS)
 * IE

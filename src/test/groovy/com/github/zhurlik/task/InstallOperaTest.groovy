@@ -6,7 +6,6 @@ import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.hamcrest.core.StringContains
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
@@ -19,7 +18,6 @@ import static org.junit.Assert.assertNotNull
  *
  * @author zhurlik@gmail.com
  */
-@Ignore
 class InstallOperaTest {
 
     @Rule
@@ -58,5 +56,11 @@ class InstallOperaTest {
             task.windowsInstaller.driverInstaller()
             task.windowsInstaller.browserInstaller()
         }
+    }
+
+    @Test
+    void testUrl() {
+        task.browserVersion = '12222'
+        assertEquals('https://www.opera.com/download/index.dml/?os=linux-x86-64&ver=12222&local=y', task.getUrl())
     }
 }

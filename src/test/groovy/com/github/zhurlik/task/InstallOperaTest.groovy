@@ -49,6 +49,13 @@ class InstallOperaTest {
     }
 
     @Test
+    void testLinuxInstaller() {
+        if (task.isLinux()) {
+            task.linuxInstaller.driverInstaller()
+        }
+    }
+
+    @Test
     void testWindowsInstaller() {
         if (task.isLinux()) {
             thrown.expect(GradleException)

@@ -2,6 +2,7 @@ package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
 import org.apache.tools.ant.BuildException
+import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.hamcrest.core.StringContains
@@ -90,6 +91,16 @@ class InstallPhantomJsTest {
             }
 
             task.apply()
+        }
+    }
+
+    @Test
+    void testWindowsInstaller() {
+        if (task.isLinux()) {
+            thrown.expect(GradleException)
+            thrown.expectMessage('PHANTOMJS is not installed:')
+            task.windowsInstaller.driverInstaller()
+            task.windowsInstaller.browserInstaller()
         }
     }
 }

@@ -50,8 +50,9 @@ class InstallFireFoxTest {
 
     @Test
     void testDriverUrl() {
-        task.driverVersion = 'v1'
-        assertEquals('https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz',
+        task.driverVersion = '123'
+        assertEquals("https://github.com/mozilla/geckodriver/releases/download/" +
+                "v123/geckodriver-v123-${task.is64() ? 'linux64': 'linux32'}.tar.gz",
                 task.getDriverUrl())
     }
 

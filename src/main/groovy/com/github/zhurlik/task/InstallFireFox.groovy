@@ -74,11 +74,17 @@ class InstallFireFox extends AbstractInstall {
     }
 
     /**
+     * Return url for downloading a webdriver.
+     *  For example:
+     *      https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
+     *      https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux32.tar.gz
      *
      * @return
      */
     String getDriverUrl() {
-        return 'https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz'
+        final String platform = "${is64() ? 'linux64' : 'linux32'}"
+        return "https://github.com/mozilla/geckodriver/releases/download/" +
+                "v$driverVersion/geckodriver-v$driverVersion-${platform}.tar.gz"
     }
 
     /**

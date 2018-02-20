@@ -2,6 +2,7 @@ package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
 import org.apache.tools.ant.BuildException
+import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.hamcrest.core.StringContains
@@ -38,12 +39,28 @@ class InstallFireFoxTest {
     }
 
     @Test
-    void testUrl() {
+    void testBrowserUrl() {
         task.browserVersion = '123'
         if (task.isLinux()) {
             assertEquals("https://ftp.mozilla.org/pub/firefox/releases/" +
                     "123/${task.is64() ? 'linux-x86_64' : 'linux-i686'}/en-US/firefox-123.tar.bz2",
                     task.getBrowserUrl())
+        }
+    }
+
+    @Test
+    void testDriverUrl() {
+        task.driverVersion = 'v1'
+        assertEquals('https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz',
+                task.getDriverUrl())
+    }
+
+    @Test
+    void testWindowsInstaller() {
+        if (task.isLinux()) {
+            thrown.expect(GradleException)
+            thrown.expectMessage('FIREFOX is not installed:')
+            task.windowsInstaller.install()
         }
     }
 

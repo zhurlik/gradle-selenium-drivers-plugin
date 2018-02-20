@@ -58,7 +58,7 @@ class InstallIE11Test {
     void testWindowsInstaller() {
         if (task.isLinux()) {
             thrown.expect(GradleException)
-            thrown.expectMessage('IE is not installed:')
+            thrown.expectMessage('ie11 is not installed:')
             task.windowsInstaller.driverInstaller()
             task.windowsInstaller.browserInstaller()
         }

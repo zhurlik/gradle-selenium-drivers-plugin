@@ -59,7 +59,7 @@ class InstallOperaTest {
     void testWindowsInstaller() {
         if (task.isLinux()) {
             thrown.expect(GradleException)
-            thrown.expectMessage('OPERA is not installed:')
+            thrown.expectMessage('opera is not installed:')
             task.windowsInstaller.driverInstaller()
             task.windowsInstaller.browserInstaller()
         }

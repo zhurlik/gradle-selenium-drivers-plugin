@@ -65,7 +65,7 @@ class InstallPhantomJs extends AbstractInstall {
         windowsInstaller = new Installer(
                 {
                     //choco install phantomjs --version 2.1.1 -my
-                    choco('phantomjs')
+                    choco('phantomjs', browserVersion)
                 },
                 {}
         )

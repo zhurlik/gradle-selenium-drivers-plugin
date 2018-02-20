@@ -25,7 +25,7 @@ class InstallIE11 extends AbstractInstall {
         windowsInstaller = new Installer(
                 {
                     //choco install ie11 --version 0.2 -my
-                    choco('ie11')
+                    choco('ie11', browserVersion)
                 },
                 {}
         )

@@ -98,7 +98,7 @@ class InstallPhantomJsTest {
     void testWindowsInstaller() {
         if (task.isLinux()) {
             thrown.expect(GradleException)
-            thrown.expectMessage('PHANTOMJS is not installed:')
+            thrown.expectMessage('phantomjs is not installed:')
             task.windowsInstaller.driverInstaller()
             task.windowsInstaller.browserInstaller()
         }

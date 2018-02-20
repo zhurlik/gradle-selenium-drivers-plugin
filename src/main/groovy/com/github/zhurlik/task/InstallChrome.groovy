@@ -26,7 +26,7 @@ class InstallChrome extends AbstractInstall {
         windowsInstaller = new Installer(
                 {
                     //choco install googlechrome --version 64.0.3282.16700 -my
-                    choco('googlechrome')
+                    choco('googlechrome', browserVersion)
                 },
                 {}
         )

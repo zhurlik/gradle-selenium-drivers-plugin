@@ -66,10 +66,14 @@ class InstallFireFox extends AbstractInstall {
         windowsInstaller = new Installer(
                 {
                     //choco install firefox --version 58.0.2 -my
-                    choco('firefox')
-
+                    choco('firefox', browserVersion)
                 },
-                {}
+                {
+                    //choco install selenium-gecko-driver --version 0.19.1.20171103 -my
+                    choco('selenium-gecko-driver', driverVersion)
+                    System.properties['webdriver.gecko.driver'] = Paths.get(getToolsLocation(), 'selenium',
+                            'geckodriver.exe').toString()
+                }
         )
     }
 

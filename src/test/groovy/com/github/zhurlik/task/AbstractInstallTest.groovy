@@ -58,7 +58,7 @@ class AbstractInstallTest {
     @Test(expected = GradleException)
     void testChoco() {
         task.browser = Browsers.CHROME
-        task.choco('test-package')
+        task.choco('test-package', '1.0')
     }
 
     private static class TestTask extends AbstractInstall {

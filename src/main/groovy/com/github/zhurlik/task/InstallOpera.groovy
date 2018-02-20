@@ -48,7 +48,7 @@ class InstallOpera extends AbstractInstall {
         windowsInstaller = new Installer(
                 {
                     //choco install opera --version 51.0.2830.34 -my
-                    choco('opera')
+                    choco('opera', browserVersion)
 
                 },
                 {}

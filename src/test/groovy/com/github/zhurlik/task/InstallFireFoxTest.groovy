@@ -61,7 +61,7 @@ class InstallFireFoxTest {
     void testWindowsInstaller() {
         if (task.isLinux()) {
             thrown.expect(GradleException)
-            thrown.expectMessage('FIREFOX is not installed:')
+            thrown.expectMessage('selenium-gecko-driver is not installed:')
             task.windowsInstaller.driverInstaller()
             task.windowsInstaller.browserInstaller()
         }

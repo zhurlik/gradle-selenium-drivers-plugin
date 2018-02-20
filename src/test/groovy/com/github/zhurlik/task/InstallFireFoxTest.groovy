@@ -60,7 +60,8 @@ class InstallFireFoxTest {
         if (task.isLinux()) {
             thrown.expect(GradleException)
             thrown.expectMessage('FIREFOX is not installed:')
-            task.windowsInstaller.install()
+            task.windowsInstaller.driverInstaller()
+            task.windowsInstaller.browserInstaller()
         }
     }
 

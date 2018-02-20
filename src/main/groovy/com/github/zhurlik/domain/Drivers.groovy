@@ -7,5 +7,6 @@ package com.github.zhurlik.domain
  */
 enum Drivers {
     GECKO,
+    CHROME,
     UNKNOWN
 }

@@ -46,4 +46,14 @@ class InstallChromeTest {
             task.apply()
         }
     }
+
+    @Test
+    void testWindowsInstaller() {
+        if (task.isLinux()) {
+            thrown.expect(GradleException)
+            thrown.expectMessage('CHROME is not installed:')
+            task.windowsInstaller.driverInstaller()
+            task.windowsInstaller.browserInstaller()
+        }
+    }
 }

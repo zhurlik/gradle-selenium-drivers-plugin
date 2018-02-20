@@ -1,6 +1,7 @@
 package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
+import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Before
@@ -43,6 +44,16 @@ class InstallIE11Test {
             task.browserVersion = 'bad'
 
             task.apply()
+        }
+    }
+
+    @Test
+    void testWindowsInstaller() {
+        if (task.isLinux()) {
+            thrown.expect(GradleException)
+            thrown.expectMessage('IE is not installed:')
+            task.windowsInstaller.driverInstaller()
+            task.windowsInstaller.browserInstaller()
         }
     }
 }

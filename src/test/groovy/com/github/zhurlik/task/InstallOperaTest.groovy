@@ -4,6 +4,7 @@ import com.github.zhurlik.domain.Browsers
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
+import org.hamcrest.core.StringContains
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Rule
@@ -42,10 +43,20 @@ class InstallOperaTest {
     void testApply() {
         if (task.isLinux()) {
             thrown.expect(GradleException)
-            thrown.expectMessage('Not implemented yet')
+            thrown.expectMessage(StringContains.containsString('Cannot expand TAR '))
             task.browserVersion = 'bad'
 
             task.apply()
+        }
+    }
+
+    @Test
+    void testWindowsInstaller() {
+        if (task.isLinux()) {
+            thrown.expect(GradleException)
+            thrown.expectMessage('OPERA is not installed:')
+            task.windowsInstaller.driverInstaller()
+            task.windowsInstaller.browserInstaller()
         }
     }
 }

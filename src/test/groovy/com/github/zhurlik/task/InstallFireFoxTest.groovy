@@ -1,6 +1,7 @@
 package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
+import com.github.zhurlik.domain.Drivers
 import org.apache.tools.ant.BuildException
 import org.gradle.api.GradleException
 import org.gradle.api.Project
@@ -82,12 +83,25 @@ class InstallFireFoxTest {
     void testApplyUseSkipDownloading() {
         if (task.isLinux()) {
             task.browserVersion = 'fake'
+            task.driverVersion = '0.19.1'
             project.copy {
                 from InstallFireFoxTest.getClassLoader().getResource('firefox-fake.tar.bz2').path
                 into task.temporaryDir.path
             }
 
             task.apply()
+            assertEquals("${task.project.buildDir}/browser/${Browsers.FIREFOX}/fake/firefox/firefox".toString(),
+                    System.properties['webdriver.firefox.bin'])
+        }
+    }
+
+    @Test
+    void testInstallDriver() {
+        if (task.isLinux()) {
+            task.driverVersion = '0.19.1'
+            task.linuxInstaller.driverInstaller()
+            assertEquals("${task.project.buildDir}/driver/${Drivers.GECKO}/0.19.1/geckodriver".toString(),
+                    System.properties['webdriver.gecko.driver'])
         }
     }
 }

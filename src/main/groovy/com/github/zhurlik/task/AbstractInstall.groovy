@@ -64,6 +64,7 @@ abstract class AbstractInstall extends DefaultTask {
     protected void info() {
         logger.quiet('Installing...')
         logger.quiet("Browser: ${browser.toString().toLowerCase()} $browserVersion")
+        logger.quiet("WebDriver: ${driver.toString().toLowerCase()} $driverVersion")
     }
 
     /**

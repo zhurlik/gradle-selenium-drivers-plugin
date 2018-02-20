@@ -21,7 +21,8 @@ class FireFoxIntegTest extends Basic {
     @Test
     void testMain() {
 
-        final Path projectPath = Paths.get(Thread.currentThread().getContextClassLoader().getResource('').path, 'firefox')
+        final Path projectPath = Paths.get(new File(
+                Thread.currentThread().getContextClassLoader().getResource('').path).toString(), 'firefox')
         final Project project = ProjectBuilder.builder()
                 .withName('firefox')
                 .withProjectDir(projectPath.toFile())

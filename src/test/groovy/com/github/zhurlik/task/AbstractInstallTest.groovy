@@ -61,6 +61,11 @@ class AbstractInstallTest {
         task.choco('test-package', '1.0')
     }
 
+    @Test
+    void testGetToolsLocation() {
+        assertEquals('c:\\tools', task.getToolsLocation())
+    }
+
     private static class TestTask extends AbstractInstall {
         TestTask() {
             linuxInstaller = new Installer({}, {})

@@ -113,19 +113,25 @@ abstract class AbstractInstall extends DefaultTask {
      */
     protected String getToolsLocation() {
         new ByteArrayOutputStream().withCloseable { out ->
-            ExecResult res = project.exec {
-                commandLine 'powershell', "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Confirm:\$False; " +
-                        "Import-Module ${System.env['ChocolateyInstall']}\\helpers\\chocolateyInstaller.psm1 -Force; Get-ToolsLocation"
-                standardOutput = out
-                ignoreExitValue = true
-            }
+            try {
+                ExecResult res = project.exec {
+                    commandLine 'powershell',
+                            'Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Confirm:$False;',
+                            "Import-Module ${System.env['ChocolateyInstall']}\\helpers\\chocolateyInstaller.psm1 -Force;",
+                            'Get-ToolsLocation'
+                    standardOutput = out
+                    ignoreExitValue = true
+                }
 
-            if (res.exitValue == 0) { // success
-                final String value = out.toString().trim()
-                logger.debug("Get-ToolsLocation: ${value}")
-                return value
-            } else { // failure
-                logger.error("There is a problem with Get-ToolsLocation: ${out.toString()}")
+                if (res.exitValue == 0) { // success
+                    final String value = out.toString().trim()
+                    logger.debug("Get-ToolsLocation: ${value}")
+                    return value
+                } else { // failure
+                    logger.error("There is a problem with Get-ToolsLocation: ${out.toString()}")
+                }
+            } catch (Exception ex) {
+                logger.error('There is a problem with Get-ToolsLocation:', ex)
             }
 
             // default

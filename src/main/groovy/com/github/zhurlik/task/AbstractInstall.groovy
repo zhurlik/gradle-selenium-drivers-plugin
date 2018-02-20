@@ -2,6 +2,7 @@ package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
 import com.github.zhurlik.domain.Drivers
+import com.github.zhurlik.domain.Installer
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.Input
@@ -28,11 +29,11 @@ abstract class AbstractInstall extends DefaultTask {
     @Input
     String driverVersion
 
-    /**
-     * Optional to be able to specify own actions for installing.
-     */
-    Closure linuxInstaller
-    Closure windowsInstaller
+    @Input
+    Installer linuxInstaller
+
+    @Input
+    Installer windowsInstaller
 
     @TaskAction
     void apply() {
@@ -81,28 +82,26 @@ abstract class AbstractInstall extends DefaultTask {
      * @param packageName
      */
     protected void choco(final String packageName) {
-        Optional.ofNullable(windowsInstaller).orElse {
-            try {
-                new ByteArrayOutputStream().withCloseable { out ->
-                    ExecResult res = project.exec {
-                        commandLine 'cmd', '/c', "choco install $packageName --version $browserVersion -my"
-                        standardOutput = out
-                        ignoreExitValue = true
-                    }
-
-                    final String log = out.toString()
-                    if (res.exitValue == 0) { // success
-                        logger.quiet("$browser has been installed")
-                        logger.debug("Intsallation log: $log")
-                    } else { // failure
-                        logger.error("A problem during installation: $log")
-                        res.rethrowFailure()
-                    }
+        try {
+            new ByteArrayOutputStream().withCloseable { out ->
+                ExecResult res = project.exec {
+                    commandLine 'cmd', '/c', "choco install $packageName --version $browserVersion -my"
+                    standardOutput = out
+                    ignoreExitValue = true
                 }
-            } catch (Exception ex) {
-                throw new GradleException("$browser is not installed:", ex)
+
+                final String log = out.toString()
+                if (res.exitValue == 0) { // success
+                    logger.quiet("$browser has been installed")
+                    logger.debug("Intsallation log: $log")
+                } else { // failure
+                    logger.error("A problem during installation: $log")
+                    res.rethrowFailure()
+                }
             }
-        }()
+        } catch (Exception ex) {
+            throw new GradleException("$browser is not installed:", ex)
+        }
     }
 
     protected void install() {
@@ -111,6 +110,21 @@ abstract class AbstractInstall extends DefaultTask {
         onLinux()
     }
 
-    protected abstract void onLinux()
-    protected abstract void onWindows()
+    /**
+     * Executes {@link Installer} on Windows.
+     */
+    private void onWindows() {
+        if (isWindows()) {
+            windowsInstaller.install()
+        }
+    }
+
+    /**
+     * Executes {@link Installer} on Linux.
+     */
+    private void onLinux() {
+        if (isLinux()) {
+            linuxInstaller.install()
+        }
+    }
 }

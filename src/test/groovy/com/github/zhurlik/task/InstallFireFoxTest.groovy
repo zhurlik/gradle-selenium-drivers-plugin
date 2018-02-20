@@ -43,7 +43,7 @@ class InstallFireFoxTest {
         if (task.isLinux()) {
             assertEquals("https://ftp.mozilla.org/pub/firefox/releases/" +
                     "123/${task.is64() ? 'linux-x86_64' : 'linux-i686'}/en-US/firefox-123.tar.bz2",
-                    task.url)
+                    task.getBrowserUrl())
         }
     }
 

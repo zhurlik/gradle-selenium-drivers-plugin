@@ -1,6 +1,7 @@
 package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
+import com.github.zhurlik.domain.Installer
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.internal.impldep.org.codehaus.plexus.interpolation.os.Os
@@ -60,15 +61,10 @@ class AbstractInstallTest {
         task.choco('test-package')
     }
 
-    private static class TestTask extends AbstractInstall{
-        @Override
-        protected void onLinux() {
-
-        }
-
-        @Override
-        protected void onWindows() {
-
+    private static class TestTask extends AbstractInstall {
+        TestTask() {
+            linuxInstaller = new Installer({}, {})
+            windowsInstaller = new Installer({}, {})
         }
     }
 }

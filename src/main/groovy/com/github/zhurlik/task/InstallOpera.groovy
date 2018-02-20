@@ -2,6 +2,7 @@ package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
 import com.github.zhurlik.domain.Drivers
+import com.github.zhurlik.domain.Installer
 
 import java.nio.file.Paths
 
@@ -15,47 +16,43 @@ class InstallOpera extends AbstractInstall {
     InstallOpera() {
         browser = Browsers.OPERA
         driver = Drivers.UNKNOWN
-    }
 
-    /**
-     * Installing Opera on Windows via choco.
-     */
-    @Override
-    void onWindows() {
-        if (isWindows()) {
-            //choco install opera --version 51.0.2830.34 -my
-            choco('opera')
-        }
-    }
+        linuxInstaller = new  Installer(
+                /**
+                 * Usual installation for Linux.
+                 * Downloading from:
+                 *      https://www.opera.com/download/index.dml/?os=linux-x86-64&list=all
+                 *      https://www.opera.com/download/index.dml/?os=linux-i386&list=all
+                 */
+                {
+                    ant.get(src: getUrl(),
+                            dest: temporaryDir.path,
+                            skipexisting: true,
+                            verbose: true
+                    )
 
-    /**
-     * Usual installation for Linux.
-     * Downloading from:
-     *      https://www.opera.com/download/index.dml/?os=linux-x86-64&list=all
-     *      https://www.opera.com/download/index.dml/?os=linux-i386&list=all
-     */
-    @Override
-    void onLinux() {
-        if (isLinux()) {
-            Optional.ofNullable(linuxInstaller).orElse {
-                ant.get(src: getUrl(),
-                        dest: temporaryDir.path,
-                        skipexisting: true,
-                        verbose: true
-                )
+                    final String filename = Paths.get(new URI(getUrl()).getPath()).getFileName().toString()
+                    final String archive = "${temporaryDir.path}/$filename"
+                    logger.debug("Downloaded: $archive")
+                    final String target = "${project.buildDir}/browser/$browser/$browserVersion"
+                    project.copy {
+                        from project.tarTree(project.resources.bzip2(archive))
+                        into target
+                    }
+                    logger.quiet("$browser has been installed")
+                    logger.debug("Installed to: $target")
+                },
+                {}
+        )
 
-                final String filename = Paths.get(new URI(url).getPath()).getFileName().toString()
-                final String archive = "${temporaryDir.path}/$filename"
-                logger.debug("Downloaded: $archive")
-                final String target = "${project.buildDir}/browser/$browser/$browserVersion"
-                project.copy {
-                    from project.tarTree(project.resources.bzip2(archive))
-                    into target
-                }
-                logger.quiet("$browser has been installed")
-                logger.debug("Installed to: $target")
-            }()
-        }
+        windowsInstaller = new Installer(
+                {
+                    //choco install opera --version 51.0.2830.34 -my
+                    choco('opera')
+
+                },
+                {}
+        )
     }
 
     /**

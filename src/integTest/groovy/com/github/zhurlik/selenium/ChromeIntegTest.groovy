@@ -1,6 +1,7 @@
 package com.github.zhurlik.selenium
 
 import com.github.zhurlik.Basic
+import com.github.zhurlik.task.InstallChrome
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder

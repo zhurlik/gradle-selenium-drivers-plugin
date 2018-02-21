@@ -36,6 +36,7 @@ class InstallPhantomJsTest {
         task = project.tasks['installPhantomJs']
         assertNotNull(task)
         assertEquals(Browsers.PHANTOMJS, task.browser)
+        assertEquals('not required', task.driverVersion)
     }
 
     @Test

@@ -16,7 +16,7 @@ class InstallPhantomJs extends AbstractInstall {
 
     InstallPhantomJs() {
         browser = Browsers.PHANTOMJS
-        driver = Drivers.UNKNOWN
+        driver = Drivers.PHANTOMJS // GHOST
 
         linuxInstaller = new  Installer(
 
@@ -58,6 +58,10 @@ class InstallPhantomJs extends AbstractInstall {
                     }
                     logger.quiet("$browser has been installed")
                     logger.debug("Installed to: $target")
+
+                    final String platform = "${is64() ? 'linux-x86_64' : 'linux-i686'}"
+                    System.properties['phantomjs.binary.path'] = Paths.get(target,
+                            "phantomjs-$browserVersion-$platform", 'bin', 'phantomjs').toString()
                 },
                 {}
         )

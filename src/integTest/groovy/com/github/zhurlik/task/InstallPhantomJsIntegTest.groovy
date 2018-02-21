@@ -16,8 +16,9 @@ import java.nio.file.Paths
  * @author zhurlik@gmail.com
  */
 class InstallPhantomJsIntegTest {
-    @Test(expected = GradleException)
-    void testChromeOnLinux() {
+
+    @Test
+    void testPantomJsOnLinux() {
         if (Os.isFamily(Os.FAMILY_UNIX)) {
             final Path projectPath = Paths.get(Thread.currentThread().getContextClassLoader().getResource('').path, 'test-phantomjs')
             final Project project = ProjectBuilder.builder()
@@ -28,7 +29,8 @@ class InstallPhantomJsIntegTest {
             project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
             project.task(type: InstallPhantomJs, 'installPhantomJs', {
-                browserVersion '2.1.1'
+                browserVersion = '2.1.1'
+                driverVersion = '2.1.1'
             })
 
             executeTask(project.tasks['installPhantomJs'])
@@ -36,7 +38,7 @@ class InstallPhantomJsIntegTest {
     }
 
     @Test
-    void testChromeOnWindows() {
+    void testPhantomJsOnWindows() {
         if (Os.isFamily(Os.FAMILY_WINDOWS)) {
             final Path projectPath = Paths.get( new File(Thread.currentThread().getContextClassLoader().getResource('')
                     .toURI()).path, 'test-phantomjs')
@@ -47,7 +49,7 @@ class InstallPhantomJsIntegTest {
 
             project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-            project.task(type: InstallOpera, 'installPhantomJs', {
+            project.task(type: InstallPhantomJs, 'installPhantomJs', {
                 browserVersion '2.1.1'
             })
 

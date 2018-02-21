@@ -8,5 +8,7 @@ package com.github.zhurlik.domain
 enum Drivers {
     GECKO,
     CHROME,
+    PHANTOMJS,
+    GHOST,
     UNKNOWN
 }

@@ -17,6 +17,7 @@ class InstallPhantomJs extends AbstractInstall {
     InstallPhantomJs() {
         browser = Browsers.PHANTOMJS
         driver = Drivers.PHANTOMJS // GHOST
+        driverVersion = 'not required'
 
         linuxInstaller = new  Installer(
 
@@ -70,6 +71,8 @@ class InstallPhantomJs extends AbstractInstall {
                 {
                     //choco install phantomjs --version 2.1.1 -my
                     choco('phantomjs', browserVersion)
+                    System.properties['phantomjs.binary.path'] = Paths.get(getToolsLocation(), 'PhantomJS',
+                            "phantomjs-$browserVersion-windows", 'phantomjs.exe').toString()
                 },
                 {}
         )

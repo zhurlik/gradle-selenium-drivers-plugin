@@ -6,6 +6,7 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
+import org.openqa.selenium.OutputType
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.firefox.FirefoxDriver
 
@@ -40,7 +41,9 @@ class FireFoxIntegTest extends Basic {
 
         final WebDriver webDriver = new FirefoxDriver()
         webDriver.get('https://github.com/zhurlik')
+        screenshot(task, webDriver.getScreenshotAs(OutputType.BYTES), 'page1')
         webDriver.findElementByXPath("//a[@href='/zhurlik/gradle-jboss-modules-plugin']").click()
+        screenshot(task, webDriver.getScreenshotAs(OutputType.BYTES), 'page2')
         webDriver.close()
     }
 }

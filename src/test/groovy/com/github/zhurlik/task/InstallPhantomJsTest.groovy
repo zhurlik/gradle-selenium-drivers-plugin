@@ -74,6 +74,7 @@ class InstallPhantomJsTest {
     @Test
     void testApplyUseSkipDownloading() {
         if (task.isLinux()) {
+            final String platform = "${task.is64() ? 'linux-x86_64' : 'linux-i686'}"
             // bitbucket
             task.browserVersion = '2.1.1-fake'
             project.copy {
@@ -82,7 +83,9 @@ class InstallPhantomJsTest {
             }
 
             task.apply()
-
+            assertEquals("${task.project.buildDir}/browser/${Browsers.PHANTOMJS}/2.1.1-fake/phantomjs-${task.browserVersion}-${platform}/bin/phantomjs".toString(),
+                    System.properties['phantomjs.binary.path'])
+            System.properties.remove('phantomjs.binary.path')
             // google code
             task.browserVersion = '1.9.2-fake'
             project.copy {
@@ -91,6 +94,9 @@ class InstallPhantomJsTest {
             }
 
             task.apply()
+
+            assertEquals("${task.project.buildDir}/browser/${Browsers.PHANTOMJS}/1.9.2-fake/phantomjs-${task.browserVersion}-${platform}/bin/phantomjs".toString(),
+                    System.properties['phantomjs.binary.path'])
         }
     }
 

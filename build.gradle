@@ -83,6 +83,6 @@ dependencies {
 
     testCompile group: 'junit', name: 'junit', version: "$junitVersion"
 
-    testCompile group: 'com.codeborne', name: 'phantomjsdriver', version: '1.4.4'
-    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.9.1'
+    testCompile group: 'com.codeborne', name: 'phantomjsdriver', version: "$phantomjsDriverVersion"
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: "$seleniumVersion"
 }

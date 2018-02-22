@@ -29,6 +29,7 @@ class InstallChromeIntegTest extends Basic {
 
             project.task(type: InstallChrome, 'installChrome', {
                 browserVersion '64.0.3282.16700'
+                driverVersion '2.35'
             })
 
             executeTask(project.tasks['installChrome'])
@@ -49,6 +50,7 @@ class InstallChromeIntegTest extends Basic {
 
             project.task(type: InstallChrome, 'installChrome', {
                 browserVersion '64.0.3282.16700'
+                driverVersion '2.35'
             })
 
             executeTask(project.tasks['installChrome'])

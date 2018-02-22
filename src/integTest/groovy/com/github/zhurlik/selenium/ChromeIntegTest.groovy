@@ -2,6 +2,7 @@ package com.github.zhurlik.selenium
 
 import com.github.zhurlik.Basic
 import com.github.zhurlik.task.InstallChrome
+import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
@@ -19,7 +20,7 @@ import java.nio.file.Paths
  * @author zhurlik@gmail.com
  */
 class ChromeIntegTest extends Basic {
-    @Test
+    @Test(expected = GradleException)
     void testMain() {
 
         final Path projectPath = Paths.get(new File(

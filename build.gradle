@@ -31,6 +31,18 @@ jacoco {
 }
 
 jacocoTestReport {
+    doFirst {
+        classDirectories = classDirectories.collect {
+            fileTree(it) {
+                exclude '**/*_getToolsLocation*'
+                exclude '**/*choco*'
+                exclude '**/*Choco*'
+                exclude '**/*_closure3'
+                exclude '**/*_closure4'
+            }
+        }.sum()
+    }
+
     reports {
         xml.enabled = true // coveralls plugin depends on xml format report
         html.enabled = true
@@ -40,9 +52,11 @@ jacocoTestReport {
 test {
     jacoco {
         excludes += [
-//                '**/*_onWindows_closure*',
-//                '**/*_checkChoco_closure*',
-                '**/*_closure*'
+                '**/*_getToolsLocation*',
+                '**/*choco*',
+                '**/*Choco*',
+                '**/*_closure3',
+                '**/*_closure4'
         ]
     }
 }

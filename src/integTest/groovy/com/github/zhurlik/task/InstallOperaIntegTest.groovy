@@ -29,6 +29,7 @@ class InstallOperaIntegTest extends Basic {
 
             project.task(type: InstallOpera, 'installOpera', {
                 browserVersion '51.0.2830.34'
+                driverVersion '2.33'
             })
 
             executeTask(project.tasks['installOpera'])
@@ -49,6 +50,7 @@ class InstallOperaIntegTest extends Basic {
 
             project.task(type: InstallOpera, 'installOpera', {
                 browserVersion '51.0.2830.34'
+                driverVersion '2.33'
             })
 
             executeTask(project.tasks['installOpera'])

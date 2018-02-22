@@ -13,7 +13,7 @@ class InstallIE11 extends AbstractInstall {
 
     InstallIE11() {
         browser = Browsers.IE
-        driver = Drivers.UNKNOWN
+        driver = Drivers.IE
 
         linuxInstaller = new  Installer(
                 {
@@ -27,7 +27,10 @@ class InstallIE11 extends AbstractInstall {
                     //choco install ie11 --version 0.2 -my
                     choco('ie11', browserVersion)
                 },
-                {}
+                {
+                    //choco install selenium-ie-driver --version 3.8.0 -my
+                    choco('selenium-ie-driver', driverVersion)
+                }
         )
     }
 }

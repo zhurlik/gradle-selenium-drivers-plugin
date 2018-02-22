@@ -54,6 +54,8 @@ class InstallOpera extends AbstractInstall {
                 {
                     //choco install selenium-opera-driver --version 2.33 -my
                     choco('selenium-opera-driver', driverVersion)
+                    System.properties['webdriver.opera.driver'] = Paths.get(getToolsLocation(), 'selenium',
+                            'operadriver.exe').toString()
                 }
         )
     }

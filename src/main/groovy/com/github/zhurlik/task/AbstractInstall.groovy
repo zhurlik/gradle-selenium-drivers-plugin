@@ -36,6 +36,9 @@ abstract class AbstractInstall extends DefaultTask {
     @Input
     Installer windowsInstaller
 
+    @Input
+    Installer macOsInstaller
+
     @TaskAction
     void apply() {
         install()
@@ -154,6 +157,7 @@ abstract class AbstractInstall extends DefaultTask {
         info()
         onWindows()
         onLinux()
+        onMacOsX()
     }
 
     /**
@@ -171,6 +175,15 @@ abstract class AbstractInstall extends DefaultTask {
     private void onLinux() {
         if (isLinux()) {
             linuxInstaller.install()
+        }
+    }
+
+    /**
+     * Executes {@link Installer} on Mac OS X.
+     */
+    private void onMacOsX() {
+        if (isMacOsX()) {
+            macOsInstaller.install()
         }
     }
 }

@@ -38,5 +38,7 @@ class InstallChrome extends AbstractInstall {
 
                 }
         )
+
+        macOsInstaller = new Installer({}, {})
     }
 }

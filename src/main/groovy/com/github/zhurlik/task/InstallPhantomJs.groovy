@@ -76,6 +76,8 @@ class InstallPhantomJs extends AbstractInstall {
                 },
                 {}
         )
+
+        macOsInstaller = new Installer({}, {})
     }
 
     /**

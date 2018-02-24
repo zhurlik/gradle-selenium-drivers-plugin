@@ -41,6 +41,11 @@ class AbstractInstallTest {
     }
 
     @Test
+    void testIsMacOsX() {
+        assertEquals(Os.isFamily(Os.FAMILY_MAC), task.isMacOsX())
+    }
+
+    @Test
     void testArch() {
         assertEquals(!OperatingSystem.current().nativePrefix.contains('32'), task.is64())
     }

@@ -16,6 +16,7 @@ import org.gradle.process.ExecResult
  * @author zhurlik@gmail.com
  */
 abstract class AbstractInstall extends DefaultTask {
+    private final static OperatingSystem OS =  OperatingSystem.current()
 
     @Input
     String browserVersion
@@ -46,7 +47,16 @@ abstract class AbstractInstall extends DefaultTask {
      * @return true when OS is Linux
      */
     protected boolean isLinux() {
-        return OperatingSystem.current().isLinux()
+        return OS.isLinux()
+    }
+
+    /**
+     * Checks that current OS is Mac OS X.
+     *
+     * @return true when OS is Mac OS X
+     */
+    protected boolean isMacOsX() {
+        return OS.isMacOsX()
     }
 
     /**
@@ -55,7 +65,7 @@ abstract class AbstractInstall extends DefaultTask {
      * @return true when OS is Windows
      */
     protected boolean isWindows() {
-        return OperatingSystem.current().isWindows()
+        return OS.isWindows()
     }
 
     /**
@@ -73,7 +83,7 @@ abstract class AbstractInstall extends DefaultTask {
      * @return true when 64 bit system
      */
     protected boolean is64() {
-        return OperatingSystem.current().getNativePrefix().contains('64')
+        return isMacOsX() || OS.getNativePrefix().contains('64')
     }
 
     /**

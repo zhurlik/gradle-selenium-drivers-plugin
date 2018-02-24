@@ -32,7 +32,7 @@ class AbstractInstallTest {
 
     @Test
     void testIsLinux() {
-        assertEquals(Os.isFamily(Os.FAMILY_UNIX), task.isLinux())
+        assertEquals(Os.isFamily(Os.FAMILY_UNIX), task.isLinux() || task.isMacOsX())
     }
 
     @Test

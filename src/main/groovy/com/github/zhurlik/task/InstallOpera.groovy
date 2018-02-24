@@ -15,7 +15,7 @@ class InstallOpera extends AbstractInstall {
 
     InstallOpera() {
         browser = Browsers.OPERA
-        driver = Drivers.UNKNOWN
+        driver = Drivers.OPERA
 
         linuxInstaller = new  Installer(
                 /**
@@ -51,7 +51,12 @@ class InstallOpera extends AbstractInstall {
                     choco('opera', browserVersion)
 
                 },
-                {}
+                {
+                    //choco install selenium-opera-driver --version 2.33 -my
+                    choco('selenium-opera-driver', driverVersion)
+                    System.properties['webdriver.opera.driver'] = Paths.get(getToolsLocation(), 'selenium',
+                            'operadriver.exe').toString()
+                }
         )
     }
 

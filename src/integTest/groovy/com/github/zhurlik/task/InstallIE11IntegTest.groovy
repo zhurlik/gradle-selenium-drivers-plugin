@@ -17,7 +17,7 @@ import java.nio.file.Paths
  */
 class InstallIE11IntegTest extends Basic {
     @Test(expected = GradleException)
-    void testChromeOnLinux() {
+    void testIE11OnLinux() {
         if (Os.isFamily(Os.FAMILY_UNIX)) {
             final Path projectPath = Paths.get(Thread.currentThread().getContextClassLoader().getResource('').path, 'test-ie11')
             final Project project = ProjectBuilder.builder()
@@ -27,8 +27,9 @@ class InstallIE11IntegTest extends Basic {
 
             project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-            project.task(type: InstallPhantomJs, 'installIE11', {
+            project.task(type: InstallIE11, 'installIE11', {
                 browserVersion '0.2'
+                driverVersion '3.8.0'
             })
 
             executeTask(project.tasks['installIE11'])
@@ -36,7 +37,7 @@ class InstallIE11IntegTest extends Basic {
     }
 
     @Test
-    void testChromeOnWindows() {
+    void testIE11OnWindows() {
         if (Os.isFamily(Os.FAMILY_WINDOWS)) {
             final Path projectPath = Paths.get( new File(Thread.currentThread().getContextClassLoader().getResource('')
                     .toURI()).path, 'test-ie11')
@@ -47,8 +48,9 @@ class InstallIE11IntegTest extends Basic {
 
             project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-            project.task(type: InstallOpera, 'installIE11', {
+            project.task(type: InstallIE11, 'installIE11', {
                 browserVersion '0.2'
+                driverVersion '3.8.0'
             })
 
             executeTask(project.tasks['installIE11'])

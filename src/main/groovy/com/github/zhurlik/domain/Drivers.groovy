@@ -10,5 +10,7 @@ enum Drivers {
     CHROME,
     PHANTOMJS,
     GHOST,
+    IE,
+    OPERA,
     UNKNOWN
 }

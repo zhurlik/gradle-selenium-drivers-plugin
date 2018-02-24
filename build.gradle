@@ -31,6 +31,19 @@ jacoco {
 }
 
 jacocoTestReport {
+    doFirst {
+        classDirectories = classDirectories.collect {
+            fileTree(it) {
+                exclude '**/*_getToolsLocation*'
+                exclude '**/*choco*'
+                exclude '**/*Choco*'
+                exclude '**/*_closure3'
+                exclude '**/*_closure4'
+                exclude '**/*InstallIE11*'
+            }
+        }.sum()
+    }
+
     reports {
         xml.enabled = true // coveralls plugin depends on xml format report
         html.enabled = true
@@ -39,7 +52,14 @@ jacocoTestReport {
 
 test {
     jacoco {
-        excludes += ['**/*_onWindows_closure*', '**/*_checkChoco_closure*']
+        excludes += [
+                '**/*_getToolsLocation*',
+                '**/*choco*',
+                '**/*Choco*',
+                '**/*_closure3',
+                '**/*_closure4',
+                '**/*InstallIE11*'
+        ]
     }
 }
 
@@ -83,6 +103,6 @@ dependencies {
 
     testCompile group: 'junit', name: 'junit', version: "$junitVersion"
 
-    testCompile group: 'com.codeborne', name: 'phantomjsdriver', version: '1.4.4'
-    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.9.1'
+    testCompile group: 'com.codeborne', name: 'phantomjsdriver', version: "$phantomjsDriverVersion"
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: "$seleniumVersion"
 }

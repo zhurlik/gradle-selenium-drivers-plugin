@@ -26,6 +26,7 @@ class InstallFireFoxIntegTest extends Basic {
 
         project.task(type: InstallFireFox, 'installFireFox', {
             browserVersion '58.0.2'
+            driverVersion '0.19.1'
         })
 
         executeTask(project.tasks['installFireFox'])

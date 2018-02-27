@@ -12,5 +12,6 @@ enum Drivers {
     GHOST,
     IE,
     OPERA,
+    SAFARI,
     UNKNOWN
 }

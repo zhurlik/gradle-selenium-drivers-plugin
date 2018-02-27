@@ -35,7 +35,7 @@ class PhantomJsIntegTest extends Basic {
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
         project.task(type: InstallPhantomJs, 'installPhantomJs', {
-            browserVersion '1.9.8'
+            browserVersion '2.1.1'
         })
 
         final Task task = project.tasks['installPhantomJs']

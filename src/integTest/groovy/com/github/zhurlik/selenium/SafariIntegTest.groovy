@@ -6,9 +6,11 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
+import org.openqa.selenium.Capabilities
 import org.openqa.selenium.OutputType
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.safari.SafariDriver
+import org.openqa.selenium.safari.SafariOptions
 
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -37,7 +39,10 @@ class SafariIntegTest extends Basic {
         final Task task = project.tasks['installSafari']
         executeTask(task)
 
-        final WebDriver webDriver = new SafariDriver()
+        final Capabilities options = new SafariOptions()
+        options.useCleanSession(true)
+
+        final WebDriver webDriver = new SafariDriver(options)
 
         webDriver.get('https://github.com/zhurlik')
         screenshot(task, webDriver.getScreenshotAs(OutputType.BYTES), 'page1')

@@ -27,7 +27,7 @@ class InstallSafari extends AbstractInstall {
 
         windowsInstaller = new Installer(
                 {
-                    throw new UnsupportedOperationException('Safari doesn\'t work on Linux' )
+                    throw new UnsupportedOperationException('Safari doesn\'t work on Windows' )
                 },
                 {}
         )
@@ -37,7 +37,7 @@ class InstallSafari extends AbstractInstall {
                     // doesn't require any actions
                 },
                 {
-                    // /usr/bin/safaridriver
+                    // sudo /usr/bin/safaridriver --enable
                 }
         )
     }

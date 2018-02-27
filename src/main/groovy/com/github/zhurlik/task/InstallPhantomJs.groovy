@@ -19,7 +19,7 @@ class InstallPhantomJs extends AbstractInstall {
         driver = Drivers.PHANTOMJS // GHOST
         driverVersion = 'not required'
 
-        linuxInstaller = new  Installer(
+        linuxInstaller = new Installer(
 
                 /**
                  * Usual installation for Linux.
@@ -58,19 +58,19 @@ class InstallPhantomJs extends AbstractInstall {
 
         macOsInstaller = new Installer(
                 {
-                final String filename = downloadInstaller()
-                final String archive = "${temporaryDir.path}/$filename"
-                logger.debug("Downloaded: $archive")
-                final String target = "${project.buildDir}/browser/$browser/$browserVersion"
-                project.copy {
-                    from project.zipTree(archive)
-                    into target
-                }
-                logger.quiet("$browser has been installed")
-                logger.debug("Installed to: $target")
+                    final String filename = downloadInstaller()
+                    final String archive = "${temporaryDir.path}/$filename"
+                    logger.debug("Downloaded: $archive")
+                    final String target = "${project.buildDir}/browser/$browser/$browserVersion"
+                    project.copy {
+                        from project.zipTree(archive)
+                        into target
+                    }
+                    logger.quiet("$browser has been installed")
+                    logger.debug("Installed to: $target")
 
-                System.properties['phantomjs.binary.path'] = Paths.get(target,
-                        "phantomjs-$browserVersion-macosx", 'bin', 'phantomjs').toString()
+                    System.properties['phantomjs.binary.path'] = Paths.get(target,
+                            "phantomjs-$browserVersion-macosx", 'bin', 'phantomjs').toString()
                 }, {}
         )
     }

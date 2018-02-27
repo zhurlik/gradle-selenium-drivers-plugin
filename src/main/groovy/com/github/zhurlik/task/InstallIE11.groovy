@@ -17,7 +17,7 @@ class InstallIE11 extends AbstractInstall {
 
         linuxInstaller = new  Installer(
                 {
-                    throw new UnsupportedOperationException('Internet Explorer 11 doesn\'t on Linux' )
+                    throw new UnsupportedOperationException('Internet Explorer 11 doesn\'t work on Linux' )
                 },
                 {}
         )

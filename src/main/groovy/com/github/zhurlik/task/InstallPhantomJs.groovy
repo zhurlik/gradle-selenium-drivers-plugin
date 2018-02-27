@@ -63,7 +63,7 @@ class InstallPhantomJs extends AbstractInstall {
                 logger.debug("Downloaded: $archive")
                 final String target = "${project.buildDir}/browser/$browser/$browserVersion"
                 project.copy {
-                    from project.tarTree(project.resources.zip(archive))
+                    from project.zipTree(archive)
                     into target
                 }
                 logger.quiet("$browser has been installed")

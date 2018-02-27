@@ -54,4 +54,24 @@ class InstallPhantomJsIntegTest extends Basic {
             executeTask(project.tasks['installPhantomJs'])
         }
     }
+
+    @Test
+    void testPhantomJsOnMac() {
+        if (Os.isFamily(Os.FAMILY_MAC)) {
+            final Path projectPath = Paths.get( new File(Thread.currentThread().getContextClassLoader().getResource('')
+                    .toURI()).path, 'test-phantomjs')
+            final Project project = ProjectBuilder.builder()
+                    .withName('test-phantomjs')
+                    .withProjectDir(projectPath.toFile())
+                    .build()
+
+            project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
+
+            project.task(type: InstallPhantomJs, 'installPhantomJs', {
+                browserVersion '2.1.1'
+            })
+
+            executeTask(project.tasks['installPhantomJs'])
+        }
+    }
 }

@@ -23,8 +23,9 @@ Here is a matrix to understand what we are using for downloading distributive
   - Windows - [GoogleChrome on chocolatey.org](https://chocolatey.org/packages/GoogleChrome)
   - open question
 * PhantomJs
-  - [bitbucket](https://bitbucket.org/ariya/phantomjs/downloads/)
-  - [Google Code](https://code.google.com/archive/p/phantomjs/downloads)
+  - Linux and Mac OS X
+    - [bitbucket](https://bitbucket.org/ariya/phantomjs/downloads/)
+    - [Google Code](https://code.google.com/archive/p/phantomjs/downloads)
   - Windows - [PhantomJS on chocolatey.org](https://chocolatey.org/packages/PhantomJS)
 * IE
   - Windows - [IE11 on chocolatey.org](https://chocolatey.org/packages/ie11)

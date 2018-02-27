@@ -40,7 +40,7 @@ class InstallIE11Test {
     void testApply() {
         if (task.isLinux()) {
             thrown.expect(UnsupportedOperationException)
-            thrown.expectMessage('Internet Explorer 11 doesn\'t on Linux')
+            thrown.expectMessage('Internet Explorer 11 doesn\'t work on Linux')
             task.browserVersion = 'bad'
 
             task.apply()

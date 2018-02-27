@@ -75,6 +75,7 @@ class AbstractInstallTest {
         TestTask() {
             linuxInstaller = new Installer({}, {})
             windowsInstaller = new Installer({}, {})
+            macOsInstaller = new Installer({}, {})
         }
     }
 }

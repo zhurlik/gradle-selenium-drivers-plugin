@@ -110,4 +110,15 @@ class InstallPhantomJsTest {
             task.windowsInstaller.browserInstaller()
         }
     }
+
+    @Test
+    void testMacOsXInstaller() {
+        if (task.isLinux()) {
+            thrown.expect(BuildException)
+            thrown.expectMessage(StringContains.containsString(
+                    'Can\'t get https://storage.googleapis.com/google-code-archive-downloads/v2/'))
+            task.macOsInstaller.driverInstaller()
+            task.macOsInstaller.browserInstaller()
+        }
+    }
 }

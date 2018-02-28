@@ -35,7 +35,7 @@ Here is a matrix to understand what we are using for downloading distributive
   - Linux - ftp://ftp.opera.com/pub/opera/desktop/ based on https://forums.opera.com/topic/25213/direct-links-for-downloading-old-versions-tar-gz-files
   - Windows - [Opera on chocolatey.org](https://chocolatey.org/packages/opera)
 * Safari
-  - no extra actions (ensure that Allow Remote Automation is enabled)    
+  - Mac OS X - no extra actions (ensure that Allow Remote Automation is enabled)    
 
 ## How to use
 TODO: make more examples

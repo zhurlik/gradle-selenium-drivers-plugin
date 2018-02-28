@@ -28,7 +28,6 @@ Here is a matrix to understand what we are using for downloading distributive
     - [bitbucket](https://bitbucket.org/ariya/phantomjs/downloads/)
     - [Google Code](https://code.google.com/archive/p/phantomjs/downloads)
   - Windows - [PhantomJS on chocolatey.org](https://chocolatey.org/packages/PhantomJS)
-  - Mac OS X - not yet
 * IE
   - Windows - [IE11 on chocolatey.org](https://chocolatey.org/packages/ie11)
 * Edge

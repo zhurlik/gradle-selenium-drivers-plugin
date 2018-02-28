@@ -53,7 +53,7 @@ class InstallFireFoxTest {
     void testDriverUrl() {
         task.driverVersion = '123'
         assertEquals("https://github.com/mozilla/geckodriver/releases/download/" +
-                "v123/geckodriver-v123-${task.is64() ? 'linux64': 'linux32'}.tar.gz",
+                "v123/geckodriver-v123-${task.isMacOsX() ? 'macos' : (task.is64() ? 'linux64' : 'linux32')}.tar.gz",
                 task.getDriverUrl())
     }
 

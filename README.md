@@ -18,15 +18,17 @@ Here is a matrix to understand what we are using for downloading distributive
 * FireFox&Gecko    
   - Windows - [FireFox on chocolatey.org](https://chocolatey.org/packages/Firefox)
   - Linux - [FireFox Releases](https://ftp.mozilla.org/pub/firefox/releases/)
-  - Mac - not yet
+  - Mac OS X - [FireFox Releases](https://ftp.mozilla.org/pub/firefox/releases/)
 * Chrome
   - Windows - [GoogleChrome on chocolatey.org](https://chocolatey.org/packages/GoogleChrome)
-  - open question
+  - Linux - open question
+  - Mac OS X - not yet
 * PhantomJs
   - Linux and Mac OS X
     - [bitbucket](https://bitbucket.org/ariya/phantomjs/downloads/)
     - [Google Code](https://code.google.com/archive/p/phantomjs/downloads)
   - Windows - [PhantomJS on chocolatey.org](https://chocolatey.org/packages/PhantomJS)
+  - Mac OS X - not yet
 * IE
   - Windows - [IE11 on chocolatey.org](https://chocolatey.org/packages/ie11)
 * Edge

@@ -80,15 +80,15 @@ class InstallFireFox extends AbstractInstall {
 
         macOsInstaller = new Installer(
                 {
-                    final String url = 'https://ftp.mozilla.org/pub/firefox/releases/58.0.2/mac/en-US/Firefox%2058.0.2.dmg'
-                    ant.get(src: url,
+                    ant.get(src: getBrowserUrl(),
                             dest: temporaryDir.path,
                             skipexisting: true,
                             verbose: true
                     )
 
                     // browser
-                    final String filename = Paths.get(new URI(url).getPath()).getFileName().toString().replace(' ', '%20')
+                    final String filename = Paths.get(new URI(getBrowserUrl()).getPath()).getFileName().toString()
+                            .replace(' ', '%20')
                     final String archive = "${temporaryDir.path}/$filename"
                     logger.debug("Downloaded: $archive")
                     final String target = "${project.buildDir}/browser/$browser/$browserVersion"
@@ -166,10 +166,15 @@ class InstallFireFox extends AbstractInstall {
      * For example:
      *      https://ftp.mozilla.org/pub/firefox/releases/58.0.2/linux-x86_64/en-US/firefox-58.0.2.tar.bz2
      *      https://ftp.mozilla.org/pub/firefox/releases/58.0.2/linux-i686/en-US/firefox-58.0.2.tar.bz2
+     *      https://ftp.mozilla.org/pub/firefox/releases/58.0.2/mac/en-US/Firefox%2058.0.2.dmg
      *
      * @return url
      */
     String getBrowserUrl() {
+        if (isMacOsX()) {
+            return "https://ftp.mozilla.org/pub/firefox/releases/$browserVersion/mac/en-US/Firefox%20${browserVersion}.dmg"
+        }
+
         final String platform = "${is64() ? 'linux-x86_64' : 'linux-i686'}"
         return "https://ftp.mozilla.org/pub/firefox/releases/$browserVersion/$platform/en-US/firefox-${browserVersion}.tar.bz2"
     }

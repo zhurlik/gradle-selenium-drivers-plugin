@@ -165,7 +165,7 @@ abstract class AbstractInstall extends DefaultTask {
         new ByteArrayOutputStream().withCloseable { out ->
             // mount
             ExecResult res = project.exec {
-                commandLine 'hdiutil', 'attach', archive
+                commandLine '/bin/bash', '-c', "yes qy | hdiutil attach $archive"
                 standardOutput = out
                 ignoreExitValue = true
             }

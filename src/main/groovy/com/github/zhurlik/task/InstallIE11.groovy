@@ -17,7 +17,7 @@ class InstallIE11 extends AbstractInstall {
 
         linuxInstaller = new  Installer(
                 {
-                    throw new UnsupportedOperationException('Internet Explorer 11 doesn\'t work on Linux' )
+                    throw new UnsupportedOperationException('Internet Explorer 11 doesn\'t work on Linux')
                 },
                 {}
         )
@@ -31,6 +31,13 @@ class InstallIE11 extends AbstractInstall {
                     //choco install selenium-ie-driver --version 3.8.0 -my
                     choco('selenium-ie-driver', driverVersion)
                 }
+        )
+
+        macOsInstaller = new Installer(
+                {
+                    throw  new UnsupportedOperationException('Internet Explorer 11 doesn\'t work on Mac OS X')
+                },
+                {}
         )
     }
 }

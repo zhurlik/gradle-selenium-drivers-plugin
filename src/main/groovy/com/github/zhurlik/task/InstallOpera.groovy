@@ -3,6 +3,7 @@ package com.github.zhurlik.task
 import com.github.zhurlik.domain.Browsers
 import com.github.zhurlik.domain.Drivers
 import com.github.zhurlik.domain.Installer
+import org.gradle.api.GradleException
 
 import java.nio.file.Paths
 
@@ -57,6 +58,13 @@ class InstallOpera extends AbstractInstall {
                     System.properties['webdriver.opera.driver'] = Paths.get(getToolsLocation(), 'selenium',
                             'operadriver.exe').toString()
                 }
+        )
+
+        macOsInstaller = new Installer(
+                {
+                    throw new GradleException('Not implemented yet')
+                },
+                {}
         )
     }
 

@@ -3,7 +3,6 @@ package com.github.zhurlik.task
 import com.github.zhurlik.domain.Browsers
 import com.github.zhurlik.domain.Drivers
 import com.github.zhurlik.domain.Installer
-import org.gradle.api.GradleException
 
 import java.nio.file.Paths
 
@@ -21,9 +20,7 @@ class InstallOpera extends AbstractInstall {
         linuxInstaller = new  Installer(
                 /**
                  * Usual installation for Linux.
-                 * Downloading from:
-                 *      https://www.opera.com/download/index.dml/?os=linux-x86-64&list=all
-                 *      https://www.opera.com/download/index.dml/?os=linux-i386&list=all
+                 * Downloading from: ftp://ftp.opera.com/pub/opera/desktop/
                  */
                 {
                     ant.get(src: getUrl(),
@@ -50,7 +47,8 @@ class InstallOpera extends AbstractInstall {
                 {
                     //choco install opera --version 51.0.2830.34 -my
                     choco('opera', browserVersion)
-
+                    // TODO: check for other versions
+                    System.properties['webdriver.opera.bin'] = "C:\\Program Files\\Opera\\${browserVersion}_0\\opera.exe".toString()
                 },
                 {
                     //choco install selenium-opera-driver --version 2.33 -my
@@ -62,7 +60,24 @@ class InstallOpera extends AbstractInstall {
 
         macOsInstaller = new Installer(
                 {
-                    throw new GradleException('Not implemented yet')
+                    ant.get(src: getUrl(),
+                            dest: temporaryDir.path,
+                            skipexisting: true,
+                            verbose: true
+                    )
+
+                    // browser
+                    final String filename = Paths.get(new URI(getUrl()).getPath()).getFileName().toString()
+                    final String archive = "${temporaryDir.path}/$filename"
+                    logger.debug("Downloaded: $archive")
+                    final String target = "${project.buildDir}/browser/$browser/$browserVersion"
+
+                    extractDmg(archive, '/Volumes/Opera/Opera.app', target)
+
+                    logger.quiet("$browser has been installed")
+                    logger.debug("Installed to: $target")
+
+                    System.properties['webdriver.opera.bin'] = "$target/Contents/MacOS/opera".toString()
                 },
                 {}
         )
@@ -71,12 +86,15 @@ class InstallOpera extends AbstractInstall {
     /**
      * Returns url for downloading the corresponded version.
      * For example:
-     *      https://www.opera.com/download/index.dml/?os=linux-i386&ver=45.0.2552.898&local=y
-     *      https://www.opera.com/download/index.dml/?os=linux-x86-64&ver=51.0.2830.34&local=y
+     *      ftp://ftp.opera.com/pub/opera/desktop/51.0.2830.40/mac/Opera_51.0.2830.40_Setup.dmg
      *
      * @return url
      */
     String getUrl() {
+        if (isMacOsX()) {
+            return "ftp://ftp.opera.com/pub/opera/desktop/$browserVersion/mac/Opera_${browserVersion}_Setup.dmg"
+        }
+
         final String platform = "${is64() ? 'linux-x86-64' : 'linux-i386'}"
         return "https://www.opera.com/download/index.dml/?os=$platform&ver=$browserVersion&local=y"
     }

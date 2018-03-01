@@ -4,9 +4,9 @@ import com.github.zhurlik.Basic
 import com.github.zhurlik.task.InstallOpera
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.internal.os.OperatingSystem
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
+import org.openqa.selenium.Capabilities
 import org.openqa.selenium.OutputType
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.opera.OperaDriver
@@ -41,12 +41,10 @@ class OperaIntegTest extends Basic {
         final Task task = project.tasks['installOpera']
         executeTask(task)
 
-        final OperaOptions operaOptions = new OperaOptions()
+        final Capabilities options = new OperaOptions()
+        options.setBinary(System.properties['webdriver.opera.bin'])
 
-        if (OperatingSystem.current().isWindows()) {
-            operaOptions.setBinary('C:\\Program Files\\Opera\\51.0.2830.34_0\\opera.exe')
-        }
-        final WebDriver webDriver = new OperaDriver(operaOptions)
+        final WebDriver webDriver = new OperaDriver(options)
         webDriver.get('https://github.com/zhurlik')
         screenshot(task, webDriver.getScreenshotAs(OutputType.BYTES), 'page1')
         webDriver.findElementByXPath("//a[@href='/zhurlik/gradle-jboss-modules-plugin']").click()

@@ -51,7 +51,12 @@ class InstallOperaTest {
     @Test
     void testLinuxInstaller() {
         if (task.isLinux()) {
+            task.driverVersion = '2.33'
             task.linuxInstaller.driverInstaller()
+
+            assertEquals("${task.project.buildDir}/driver/${task.driver}/${task.driverVersion}/operadriver".toString(),
+                    System.properties['webdriver.opera.driver'])
+            System.properties.remove('webdriver.opera.driver')
         }
     }
 
@@ -66,8 +71,15 @@ class InstallOperaTest {
     }
 
     @Test
-    void testUrl() {
+    void testBrowserUrl() {
         task.browserVersion = '12222'
-        assertEquals('https://www.opera.com/download/index.dml/?os=linux-x86-64&ver=12222&local=y', task.getUrl())
+        assertEquals('https://www.opera.com/download/index.dml/?os=linux-x86-64&ver=12222&local=y', task.getBrowserUrl())
+    }
+
+    @Test
+    void testDriverUrl() {
+        task.driverVersion = '123'
+        assertEquals("https://github.com/operasoftware/operachromiumdriver/releases/download/v.123/operadriver_${task.isMacOsX() ? 'mac' : 'linux'}64.zip".toString(),
+                task.getDriverUrl())
     }
 }

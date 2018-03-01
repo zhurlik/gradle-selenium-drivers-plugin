@@ -3,7 +3,6 @@ package com.github.zhurlik.task
 import com.github.zhurlik.domain.Browsers
 import com.github.zhurlik.domain.Drivers
 import com.github.zhurlik.domain.Installer
-import org.gradle.process.ExecResult
 
 import java.nio.file.Paths
 
@@ -93,49 +92,7 @@ class InstallFireFox extends AbstractInstall {
                     logger.debug("Downloaded: $archive")
                     final String target = "${project.buildDir}/browser/$browser/$browserVersion"
 
-                    // extracting dmg file
-                    try {
-                        new ByteArrayOutputStream().withCloseable { out ->
-                            ExecResult res = project.exec {
-                                commandLine 'hdiutil', 'attach', archive
-                                standardOutput = out
-                                ignoreExitValue = true
-                            }
-
-                            String log = out.toString()
-                            if (res.exitValue == 0) { // success
-                                logger.quiet("DMG file has been mounted")
-                                logger.debug("Log: $log")
-                            } else {
-                                logger.error("A problem with mounting dmg file: $log")
-                                res.rethrowFailure()
-                            }
-
-                            // copy files
-                            project.copy {
-                                from '/Volumes/Firefox/Firefox.app'
-                                into target
-                            }
-                            logger.quiet("DMG file has been extracted")
-
-                            res = project.exec {
-                                commandLine 'hdiutil', 'detach', log.readLines().last().find('/dev/disk1s[0-9]')
-                                standardOutput = out
-                                ignoreExitValue = true
-                            }
-
-                            log = out.toString()
-                            if (res.exitValue == 0) { // success
-                                logger.quiet("DMG file has been unmounted")
-                                logger.debug("Log: $log")
-                            } else {
-                                logger.error("A problem with unmounting dmg file: $log")
-                                res.rethrowFailure()
-                            }
-                        }
-                    } catch (Exception ex) {
-                        logger.warn("A problem:", ex)
-                    }
+                    extractDmg(archive, '/Volumes/Firefox/Firefox.app', target)
 
                     logger.quiet("$browser has been installed")
                     logger.debug("Installed to: $target")

@@ -34,7 +34,9 @@ class InstallOpera extends AbstractInstall {
                 into target
             }
 
-            System.properties['webdriver.opera.driver'] = Paths.get(target, 'operadriver').toString()
+            System.properties['webdriver.opera.driver'] = Paths.get(target,
+                    "operadriver_${isMacOsX() ? 'mac' : 'linux'}64",
+                    'operadriver').toString()
 
             logger.quiet("$driver has been installed")
             logger.debug("Installed to: $target")

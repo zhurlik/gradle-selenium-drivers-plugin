@@ -54,7 +54,7 @@ class InstallOperaTest {
             task.driverVersion = '2.33'
             task.linuxInstaller.driverInstaller()
 
-            assertEquals("${task.project.buildDir}/driver/${task.driver}/${task.driverVersion}/operadriver".toString(),
+            assertEquals("${task.project.buildDir}/driver/${task.driver}/${task.driverVersion}/operadriver_${task.isMacOsX() ? 'mac' : 'linux'}64/operadriver".toString(),
                     System.properties['webdriver.opera.driver'])
             System.properties.remove('webdriver.opera.driver')
         }

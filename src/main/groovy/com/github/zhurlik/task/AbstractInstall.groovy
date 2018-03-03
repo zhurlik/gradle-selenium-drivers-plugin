@@ -205,7 +205,7 @@ abstract class AbstractInstall extends DefaultTask {
     }
 
     /**
-     * Extracts a deb files using ar, tar commands and copies to target.
+     * Extracts a deb files using 'ar, tar' commands and copies to target.
      *
      * @param archive a deb file
      * @param innerPath what should be copied

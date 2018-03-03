@@ -35,9 +35,7 @@ class InstallChrome extends AbstractInstall {
                 into target
             }
 
-            System.properties['webdriver.chrome.driver'] = Paths.get(target,
-                    "chromedriver_${isMacOsX() ? 'mac' : 'linux'}64",
-                    'chromedriver').toString()
+            System.properties['webdriver.chrome.driver'] = Paths.get(target, 'chromedriver').toString()
 
             logger.quiet("$driver has been installed")
             logger.debug("Installed to: $target")

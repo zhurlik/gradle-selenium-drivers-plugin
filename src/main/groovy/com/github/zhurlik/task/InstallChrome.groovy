@@ -18,11 +18,36 @@ class InstallChrome extends AbstractInstall {
         browser = Browsers.CHROME
         driver = Drivers.CHROME
 
+        def setupChromeDriver = {
+            // webdriver on Linux and Mac OS X
+            ant.get(src: getDriverUrl(),
+                    dest: temporaryDir.path,
+                    skipexisting: true,
+                    verbose: true
+            )
+
+            final String filename = Paths.get(new URI(getDriverUrl()).getPath()).getFileName().toString()
+            final String archive = "${temporaryDir.path}/$filename"
+            logger.debug("Downloaded: $archive")
+            final String target = "${project.buildDir}/driver/$driver/$driverVersion"
+            project.copy {
+                from project.zipTree(archive)
+                into target
+            }
+
+            System.properties['webdriver.chrome.driver'] = Paths.get(target,
+                    "chromedriver_${isMacOsX() ? 'mac' : 'linux'}64",
+                    'chromedriver').toString()
+
+            logger.quiet("$driver has been installed")
+            logger.debug("Installed to: $target")
+        }
+
         linuxInstaller = new  Installer(
                 {
                     throw new GradleException('Not implemented yet')
                 },
-                {}
+                setupChromeDriver
         )
 
         windowsInstaller = new Installer(
@@ -39,6 +64,23 @@ class InstallChrome extends AbstractInstall {
                 }
         )
 
-        macOsInstaller = new Installer({}, {})
+        macOsInstaller = new Installer(
+                {
+
+                },
+                setupChromeDriver
+        )
+    }
+
+    /**
+     * Returns url for downloading a webdriver.
+     *  For example:
+     *      https://chromedriver.storage.googleapis.com/2.36/chromedriver_linux64.zip
+     *      https://chromedriver.storage.googleapis.com/2.36/chromedriver_mac64.zip
+     *
+     * @return
+     */
+    String getDriverUrl() {
+        return "https://chromedriver.storage.googleapis.com/$driverVersion/chromedriver_${isMacOsX() ? 'macos' : 'linux'}64.zip"
     }
 }

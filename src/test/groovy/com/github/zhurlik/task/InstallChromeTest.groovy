@@ -50,6 +50,7 @@ class InstallChromeTest {
     @Test
     void testLinuxInstaller() {
         if (task.isLinux()) {
+            task.driverVersion = '2.35'
             task.linuxInstaller.driverInstaller()
         }
     }
@@ -61,6 +62,15 @@ class InstallChromeTest {
             thrown.expectMessage('selenium-chrome-driver is not installed:')
             task.windowsInstaller.driverInstaller()
             task.windowsInstaller.browserInstaller()
+        }
+    }
+
+    @Test
+    void tstGetDriverUrl() {
+        if (task.isLinux() || task.isMacOsX()) {
+            task.driverVersion = 1122
+            assertEquals("https://chromedriver.storage.googleapis.com/1122/chromedriver_${task.isMacOsX() ? 'macos' : 'linux'}64.zip".toString(),
+                    task.getDriverUrl())
         }
     }
 }

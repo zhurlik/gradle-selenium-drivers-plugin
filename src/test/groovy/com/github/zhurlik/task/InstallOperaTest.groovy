@@ -1,6 +1,7 @@
 package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
+import org.apache.tools.ant.BuildException
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
@@ -40,8 +41,8 @@ class InstallOperaTest {
     @Test
     void testApply() {
         if (task.isLinux()) {
-            thrown.expect(GradleException)
-            thrown.expectMessage(StringContains.containsString('Cannot expand TAR '))
+            thrown.expect(BuildException)
+            thrown.expectMessage(StringContains.containsString('Can\'t get ftp://ftp.opera.com/pub/opera/desktop/bad/linux/opera-stable_bad_amd64.deb '))
             task.browserVersion = 'bad'
 
             task.apply()
@@ -72,8 +73,10 @@ class InstallOperaTest {
 
     @Test
     void testBrowserUrl() {
-        task.browserVersion = '12222'
-        assertEquals('https://www.opera.com/download/index.dml/?os=linux-x86-64&ver=12222&local=y', task.getBrowserUrl())
+        if (task.isLinux()) {
+            task.browserVersion = '12222'
+            assertEquals('ftp://ftp.opera.com/pub/opera/desktop/12222/linux/opera-stable_12222_amd64.deb', task.getBrowserUrl())
+        }
     }
 
     @Test

@@ -45,6 +45,6 @@ class ChromeIntegTest extends Basic {
         screenshot(task, webDriver.getScreenshotAs(OutputType.BYTES), 'page1')
         webDriver.findElementByXPath("//a[@href='/zhurlik/gradle-swagger-plugin']").click()
         screenshot(task, webDriver.getScreenshotAs(OutputType.BYTES), 'page2')
-        webDriver.close()
+        webDriver.quit()
     }
 }

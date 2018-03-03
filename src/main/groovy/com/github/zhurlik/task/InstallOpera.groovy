@@ -38,7 +38,7 @@ class InstallOpera extends AbstractInstall {
                     "operadriver_${isMacOsX() ? 'mac' : 'linux'}64",
                     'operadriver').toString()
 
-            logger.quiet("$driver has been installed")
+            logger.quiet("WebDriver $driver has been installed")
             logger.debug("Installed to: $target")
         }
 
@@ -58,12 +58,14 @@ class InstallOpera extends AbstractInstall {
                     final String archive = "${temporaryDir.path}/$filename"
                     logger.debug("Downloaded: $archive")
                     final String target = "${project.buildDir}/browser/$browser/$browserVersion"
-                    project.copy {
-                        from project.tarTree(project.resources.bzip2(archive))
-                        into target
-                    }
+
+                    // TODO: when deb or rpm?
+                    // extracting deb file
+                    extractDeb(archive, 'usr/lib/x86_64-linux-gnu/opera', target)
                     logger.quiet("$browser has been installed")
                     logger.debug("Installed to: $target")
+
+                    System.properties['webdriver.opera.bin'] = "$target/opera".toString()
                 },
                 setupOperaDriver
         )
@@ -122,8 +124,8 @@ class InstallOpera extends AbstractInstall {
             return "ftp://ftp.opera.com/pub/opera/desktop/$browserVersion/mac/Opera_${browserVersion}_Setup.dmg"
         }
 
-        final String platform = "${is64() ? 'linux-x86-64' : 'linux-i386'}"
-        return "https://www.opera.com/download/index.dml/?os=$platform&ver=$browserVersion&local=y"
+        // TODO: when deb or rpm?
+        return "ftp://ftp.opera.com/pub/opera/desktop/$browserVersion/linux/opera-stable_${browserVersion}_amd64.deb"
     }
 
     /**

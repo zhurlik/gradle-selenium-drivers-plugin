@@ -79,6 +79,6 @@ class InstallChrome extends AbstractInstall {
      * @return
      */
     String getDriverUrl() {
-        return "https://chromedriver.storage.googleapis.com/$driverVersion/chromedriver_${isMacOsX() ? 'macos' : 'linux'}64.zip"
+        return "https://chromedriver.storage.googleapis.com/$driverVersion/chromedriver_${isMacOsX() ? 'mac' : 'linux'}64.zip"
     }
 }

@@ -72,7 +72,7 @@ class InstallChromeTest {
     void tstGetDriverUrl() {
         if (task.isLinux() || task.isMacOsX()) {
             task.driverVersion = 1122
-            assertEquals("https://chromedriver.storage.googleapis.com/1122/chromedriver_${task.isMacOsX() ? 'macos' : 'linux'}64.zip".toString(),
+            assertEquals("https://chromedriver.storage.googleapis.com/1122/chromedriver_${task.isMacOsX() ? 'mac' : 'linux'}64.zip".toString(),
                     task.getDriverUrl())
         }
     }

@@ -7,6 +7,7 @@ import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.hamcrest.core.StringContains
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
@@ -39,6 +40,7 @@ class InstallOperaTest {
     }
 
     @Test
+    @Ignore
     void testApply() {
         if (task.isLinux()) {
             thrown.expect(BuildException)

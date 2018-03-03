@@ -52,6 +52,9 @@ class InstallChromeTest {
         if (task.isLinux()) {
             task.driverVersion = '2.35'
             task.linuxInstaller.driverInstaller()
+            assertEquals("${task.project.buildDir.path}/driver/${task.driver}/${task.driverVersion}/chromedriver".toString(),
+                    System.properties['webdriver.chrome.driver'])
+            System.properties.remove('webdriver.chrome.driver')
         }
     }
 

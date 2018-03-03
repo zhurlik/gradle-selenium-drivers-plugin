@@ -112,6 +112,8 @@ class InstallOpera extends AbstractInstall {
      * Returns url for downloading the corresponded version.
      * For example:
      *      ftp://ftp.opera.com/pub/opera/desktop/51.0.2830.40/mac/Opera_51.0.2830.40_Setup.dmg
+     *      ftp://ftp.opera.com/pub/opera/desktop/51.0.2830.40/linux/opera-stable_51.0.2830.40_amd64.deb
+     *      ftp://ftp.opera.com/pub/opera/desktop/51.0.2830.40/linux/opera-stable_51.0.2830.40_amd64.rpm
      *
      * @return url
      */

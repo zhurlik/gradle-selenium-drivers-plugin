@@ -246,6 +246,7 @@ abstract class AbstractInstall extends DefaultTask {
                 res.rethrowFailure()
             }
 
+            // copy to target
             project.copy {
                 from "${temporaryDir.path}/$innerPath"
                 into target

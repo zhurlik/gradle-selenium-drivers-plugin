@@ -27,9 +27,7 @@ class InstallPhantomJsIntegTest extends Basic {
 
             project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-            project.task(type: InstallPhantomJs, 'installPhantomJs', {
-                browserVersion = '2.1.1'
-            })
+            project.tasks['installPhantomJs'].browserVersion = '2.1.1'
 
             executeTask(project.tasks['installPhantomJs'])
         }
@@ -47,9 +45,7 @@ class InstallPhantomJsIntegTest extends Basic {
 
             project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-            project.task(type: InstallPhantomJs, 'installPhantomJs', {
-                browserVersion '2.1.1'
-            })
+            project.tasks['installPhantomJs'].browserVersion = '2.1.1'
 
             executeTask(project.tasks['installPhantomJs'])
         }
@@ -67,9 +63,7 @@ class InstallPhantomJsIntegTest extends Basic {
 
             project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-            project.task(type: InstallPhantomJs, 'installPhantomJs', {
-                browserVersion '2.1.1'
-            })
+            project.tasks['installPhantomJs'].browserVersion = '2.1.1'
 
             executeTask(project.tasks['installPhantomJs'])
         }

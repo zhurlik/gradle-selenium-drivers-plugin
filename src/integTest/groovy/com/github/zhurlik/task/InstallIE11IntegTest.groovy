@@ -27,10 +27,8 @@ class InstallIE11IntegTest extends Basic {
 
             project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-            project.task(type: InstallIE11, 'installIE11', {
-                browserVersion '0.2'
-                driverVersion '3.8.0'
-            })
+            project.tasks['installIE11'].browserVersion = '0.2'
+            project.tasks['installIE11'].driverVersion = '3.8.0'
 
             executeTask(project.tasks['installIE11'])
         }

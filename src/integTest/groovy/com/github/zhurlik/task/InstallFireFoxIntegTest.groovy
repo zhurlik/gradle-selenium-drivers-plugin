@@ -24,10 +24,8 @@ class InstallFireFoxIntegTest extends Basic {
 
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-        project.task(type: InstallFireFox, 'installFireFox', {
-            browserVersion '58.0.2'
-            driverVersion '0.19.1'
-        })
+        project.tasks['installFireFox'].browserVersion = '58.0.2'
+        project.tasks['installFireFox'].driverVersion = '0.19.1'
 
         executeTask(project.tasks['installFireFox'])
     }

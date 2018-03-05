@@ -27,10 +27,8 @@ class InstallOperaIntegTest extends Basic {
 
             project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-            project.task(type: InstallOpera, 'installOpera', {
-                browserVersion '51.0.2830.34'
-                driverVersion '2.33'
-            })
+            project.tasks['installOpera'].browserVersion = '51.0.2830.34'
+            project.tasks['installOpera'].driverVersion = '2.33'
 
             executeTask(project.tasks['installOpera'])
         }
@@ -48,10 +46,8 @@ class InstallOperaIntegTest extends Basic {
 
             project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-            project.task(type: InstallOpera, 'installOpera', {
-                browserVersion '51.0.2830.34'
-                driverVersion '2.33'
-            })
+            project.tasks['installOpera'].browserVersion = '51.0.2830.34'
+            project.tasks['installOpera'].driverVersion = '2.33'
 
             executeTask(project.tasks['installOpera'])
         }

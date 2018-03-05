@@ -1,7 +1,6 @@
 package com.github.zhurlik.selenium
 
 import com.github.zhurlik.Basic
-import com.github.zhurlik.task.InstallSafari
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
@@ -32,9 +31,6 @@ class SafariIntegTest extends Basic {
                 .build()
 
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
-
-        project.task(type: InstallSafari, 'installSafari', {
-        })
 
         final Task task = project.tasks['installSafari']
         executeTask(task)

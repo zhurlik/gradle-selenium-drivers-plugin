@@ -1,7 +1,6 @@
 package com.github.zhurlik.selenium
 
 import com.github.zhurlik.Basic
-import com.github.zhurlik.task.InstallFireFox
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
@@ -31,10 +30,8 @@ class FireFoxIntegTest extends Basic {
 
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-        project.task(type: InstallFireFox, 'installFireFox', {
-            browserVersion '58.0.2'
-            driverVersion '0.19.1'
-        })
+        project.tasks['installFireFox'].browserVersion = '58.0.2'
+        project.tasks['installFireFox'].driverVersion = '0.19.1'
 
         final Task task = project.tasks['installFireFox']
         executeTask(task)

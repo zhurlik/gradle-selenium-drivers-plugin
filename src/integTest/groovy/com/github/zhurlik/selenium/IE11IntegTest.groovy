@@ -1,7 +1,6 @@
 package com.github.zhurlik.selenium
 
 import com.github.zhurlik.Basic
-import com.github.zhurlik.task.InstallIE11
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
@@ -31,10 +30,8 @@ class IE11IntegTest extends Basic {
 
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-        project.task(type: InstallIE11, 'installIE11', {
-            browserVersion '0.2'
-            driverVersion '3.8.0'
-        })
+        project.tasks['installIE11'].browserVersion = '0.2'
+        project.tasks['installIE11'].driverVersion = '3.8.0'
 
         final Task task = project.tasks['installIE11']
         executeTask(task)

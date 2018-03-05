@@ -12,6 +12,7 @@ import java.nio.file.Paths
  *
  * @author zhurlik@gmail.com
  */
+@Deprecated
 class InstallPhantomJs extends AbstractInstall {
 
     InstallPhantomJs() {

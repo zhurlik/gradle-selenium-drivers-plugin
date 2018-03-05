@@ -11,6 +11,7 @@ import java.nio.file.Paths
  *
  * @author zhurlik@gmail.com
  */
+@Deprecated
 class InstallFireFox extends AbstractInstall {
 
     InstallFireFox() {

@@ -1,7 +1,6 @@
 package com.github.zhurlik.selenium
 
 import com.github.zhurlik.Basic
-import com.github.zhurlik.task.InstallOpera
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
@@ -33,10 +32,8 @@ class OperaIntegTest extends Basic {
 
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-        project.task(type: InstallOpera, 'installOpera', {
-            browserVersion '51.0.2830.34'
-            driverVersion '2.33'
-        })
+        project.tasks['installOpera'].browserVersion = '51.0.2830.34'
+        project.tasks['installOpera'].driverVersion '2.33'
 
         final Task task = project.tasks['installOpera']
         executeTask(task)

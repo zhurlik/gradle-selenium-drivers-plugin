@@ -1,7 +1,6 @@
 package com.github.zhurlik.selenium
 
 import com.github.zhurlik.Basic
-import com.github.zhurlik.task.InstallPhantomJs
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.testfixtures.ProjectBuilder
@@ -34,9 +33,7 @@ class PhantomJsIntegTest extends Basic {
 
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-        project.task(type: InstallPhantomJs, 'installPhantomJs', {
-            browserVersion '2.1.1'
-        })
+        project.tasks['installPhantomJs'].browserVersion = '2.1.1'
 
         final Task task = project.tasks['installPhantomJs']
         executeTask(task)

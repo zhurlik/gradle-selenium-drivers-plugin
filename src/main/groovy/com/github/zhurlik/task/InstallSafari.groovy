@@ -9,6 +9,7 @@ import com.github.zhurlik.domain.Installer
  *
  * @author zhurlik@gmail.com
  */
+@Deprecated
 class InstallSafari extends AbstractInstall {
 
     InstallSafari() {

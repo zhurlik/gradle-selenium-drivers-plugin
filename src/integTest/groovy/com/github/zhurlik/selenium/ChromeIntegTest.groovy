@@ -1,7 +1,6 @@
 package com.github.zhurlik.selenium
 
 import com.github.zhurlik.Basic
-import com.github.zhurlik.task.InstallChrome
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -32,10 +31,8 @@ class ChromeIntegTest extends Basic {
 
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-        project.task(type: InstallChrome, 'installChrome', {
-            browserVersion '64.0.3282.16800'
-            driverVersion '2.35'
-        })
+        project.task['installChrome'].browserVersion = '64.0.3282.16800'
+        project.task['installChrome'].driverVersion = '2.35'
 
         final Task task = project.tasks['installChrome']
         executeTask(task)

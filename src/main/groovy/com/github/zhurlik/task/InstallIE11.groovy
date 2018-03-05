@@ -9,6 +9,7 @@ import com.github.zhurlik.domain.Installer
  *
  * @author zhurlik@gmail.com
  */
+@Deprecated
 class InstallIE11 extends AbstractInstall {
 
     InstallIE11() {

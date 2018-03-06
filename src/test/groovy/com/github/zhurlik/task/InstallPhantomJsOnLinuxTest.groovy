@@ -8,8 +8,11 @@ import org.hamcrest.core.StringContains
 import org.junit.Before
 import org.junit.Test
 
+import java.nio.file.Paths
+
 import static org.junit.Assert.assertEquals
 import static org.junit.Assert.assertNotNull
+import static org.junit.Assert.assertNull
 import static org.junit.Assert.assertTrue
 
 /**
@@ -87,6 +90,7 @@ class InstallPhantomJsOnLinuxTest extends BaseTest {
         thrown.expectMessage(StringContains.containsString(
                 'Can\'t get https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/phantomjs/phantomjs-null-linux-x86_64.tar.bz2 '))
         apply()
+        assertNull(System.properties['phantomjs.binary.path'])
     }
 
     @Test
@@ -97,5 +101,21 @@ class InstallPhantomJsOnLinuxTest extends BaseTest {
             into task.temporaryDir
         }
         apply()
+        final String platform = invoke('getPlatform')
+        assertEquals(Paths.get(task.project.buildDir.path, 'browser', 'PHANTOMJS', '1.9.2-fake',
+        "phantomjs-1.9.2-fake-$platform", 'bin', 'phantomjs').toString(),
+                System.properties['phantomjs.binary.path'])
+        System.properties.remove('phantomjs.binary.path')
+    }
+
+    @Test
+    void testApplyReal() {
+        task.browserVersion = '1.9.2'
+        apply()
+        final String platform = invoke('getPlatform')
+        assertEquals(Paths.get(task.project.buildDir.path, 'browser', 'PHANTOMJS', '1.9.2',
+                "phantomjs-1.9.2-$platform", 'bin', 'phantomjs').toString(),
+                System.properties['phantomjs.binary.path'])
+        System.properties.remove('phantomjs.binary.path')
     }
 }

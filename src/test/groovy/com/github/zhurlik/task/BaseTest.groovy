@@ -1,6 +1,9 @@
 package com.github.zhurlik.task
 
+import org.gradle.api.Task
 import org.gradle.internal.reflect.JavaReflectionUtil
+import org.junit.Rule
+import org.junit.rules.ExpectedException
 
 /**
  * Common methods for unit tests.
@@ -8,6 +11,10 @@ import org.gradle.internal.reflect.JavaReflectionUtil
  * @author zhurlik@gmail.com
  */
 abstract class BaseTest {
+    protected Task task
+
+    @Rule
+    public ExpectedException thrown= ExpectedException.none();
 
     /**
      * Wrapper to invoke a private method that returns String.
@@ -15,7 +22,15 @@ abstract class BaseTest {
      * @param method name
      * @return result
      */
-    protected String getString(final String method) {
+    protected String invoke(final String method) {
         return JavaReflectionUtil.method(task, String.class, method).invoke(task)
+    }
+
+    /**
+     * Wrapper to invoke 'apply' method.
+     *
+     */
+    protected void apply() {
+        JavaReflectionUtil.method(task, Object.class, 'apply').invoke(task)
     }
 }

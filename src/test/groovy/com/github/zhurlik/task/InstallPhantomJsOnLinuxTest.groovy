@@ -1,9 +1,10 @@
 package com.github.zhurlik.task
 
+import org.apache.tools.ant.BuildException
 import org.gradle.api.Project
-import org.gradle.api.Task
 import org.gradle.internal.reflect.JavaReflectionUtil
 import org.gradle.testfixtures.ProjectBuilder
+import org.hamcrest.core.StringContains
 import org.junit.Before
 import org.junit.Test
 
@@ -18,8 +19,6 @@ import static org.junit.Assert.assertTrue
  */
 class InstallPhantomJsOnLinuxTest extends BaseTest {
 
-    private Task task
-
     @Before
     void setUp() throws Exception {
         final Project project = ProjectBuilder.builder().build()
@@ -32,42 +31,71 @@ class InstallPhantomJsOnLinuxTest extends BaseTest {
 
     @Test
     void testGetPlatform() {
-        final String res = getString('getPlatform')
+        final String res = invoke('getPlatform')
         assertNotNull(res)
         assertTrue(res in ['linux-x86_64', 'linux-i686'])
     }
 
     @Test
     void testGetUrlOnGoogleCode() {
-        String res = getString('getUrlOnGoogleCode')
-        final String platform = getString('getPlatform')
+        String res = invoke('getUrlOnGoogleCode')
+        final String platform = invoke('getPlatform')
         assertEquals("https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/phantomjs/phantomjs-null-${platform}.tar.bz2".toString(),
                 res)
 
         task.browserVersion = '111'
-        res = getString('getUrlOnGoogleCode')
+        res = invoke('getUrlOnGoogleCode')
         assertEquals("https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/phantomjs/phantomjs-111-${platform}.tar.bz2".toString(),
                 res)
-        task.browserVersion = null
     }
 
     @Test
     void testGetUrlOnBitbucket() {
-        String res = getString('getUrlOnBitbucket')
-        final String platform = getString('getPlatform')
+        String res = invoke('getUrlOnBitbucket')
+        final String platform = invoke('getPlatform')
         assertEquals("https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-null-${platform}.tar.bz2".toString(),
                 res)
 
         task.browserVersion = '123'
-        res = getString('getUrlOnBitbucket')
+        res = invoke('getUrlOnBitbucket')
         assertEquals("https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-123-${platform}.tar.bz2".toString(),
                 res)
-        task.browserVersion = null
     }
 
     @Test
-    void testDownloadInstaller() {
-        String res = getString('downloadInstaller')
+    void testDownloadInstallerWrongUrl() {
+        thrown.expect(BuildException)
+        thrown.expectMessage(StringContains.containsString(
+                'Can\'t get https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/phantomjs/phantomjs-null-linux-x86_64.tar.bz2 '))
+        invoke('downloadInstaller')
+    }
 
+    @Test
+    void testDownloadInstallerSkip() {
+        task.browserVersion = '1.9.2-fake'
+        task.project.copy {
+            from this.class.getClassLoader().getResource('phantomjs-1.9.2-fake-linux-x86_64.tar.bz2')
+            into task.temporaryDir
+        }
+        final String fileName = invoke('downloadInstaller')
+        assertEquals('phantomjs-1.9.2-fake-linux-x86_64.tar.bz2', fileName)
+    }
+
+    @Test
+    void testApplyWrong() {
+        thrown.expect(BuildException)
+        thrown.expectMessage(StringContains.containsString(
+                'Can\'t get https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/phantomjs/phantomjs-null-linux-x86_64.tar.bz2 '))
+        apply()
+    }
+
+    @Test
+    void testApplyFake() {
+        task.browserVersion = '1.9.2-fake'
+        task.project.copy {
+            from this.class.getClassLoader().getResource('phantomjs-1.9.2-fake-linux-x86_64.tar.bz2')
+            into task.temporaryDir
+        }
+        apply()
     }
 }

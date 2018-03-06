@@ -16,7 +16,7 @@ import java.nio.file.Paths
  * @author zhurlik@gmail.com
  */
 class InstallOperaIntegTest extends Basic {
-    @Test(expected = GradleException)
+    @Test
     void testChromeOnLinux() {
         if (Os.isFamily(Os.FAMILY_UNIX)) {
             final Path projectPath = Paths.get(Thread.currentThread().getContextClassLoader().getResource('').path, 'test-opera')

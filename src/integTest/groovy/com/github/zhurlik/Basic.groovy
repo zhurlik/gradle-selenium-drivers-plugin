@@ -5,6 +5,11 @@ import org.gradle.api.Task
 import java.nio.file.Path
 import java.nio.file.Paths
 
+/**
+ * For extracting a common methods.
+ *
+ * @author zhurlik@gmail.com
+ */
 abstract class Basic {
     /**
      * To be able to execute a gradle task.

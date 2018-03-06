@@ -31,8 +31,8 @@ class ChromeIntegTest extends Basic {
 
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-        project.task['installChrome'].browserVersion = '64.0.3282.16800'
-        project.task['installChrome'].driverVersion = '2.35'
+        project.tasks['installChrome'].browserVersion = '64.0.3282.16800'
+        project.tasks['installChrome'].driverVersion = '2.35'
 
         final Task task = project.tasks['installChrome']
         executeTask(task)

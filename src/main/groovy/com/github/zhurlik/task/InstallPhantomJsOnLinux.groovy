@@ -40,7 +40,7 @@ class InstallPhantomJsOnLinux extends LinuxTask {
         logger.debug("Installed to: $target")
 
         System.properties['phantomjs.binary.path'] = Paths.get(target,
-                "phantomjs-$browserVersion-$platform", 'bin', 'phantomjs').toString()
+                "phantomjs-$browserVersion-${getPlatform()}", 'bin', 'phantomjs').toString()
 
     }
 
@@ -49,7 +49,7 @@ class InstallPhantomJsOnLinux extends LinuxTask {
      *
      * @return file name
      */
-    String downloadInstaller() {
+    private String downloadInstaller() {
         String url = null
         // first attempt on https://bitbucket.org/ariya/phantomjs/downloads/
         try {
@@ -83,7 +83,7 @@ class InstallPhantomJsOnLinux extends LinuxTask {
      * @return url
      */
     private String getUrlOnBitbucket() {
-        return "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$browserVersion-${platform}.tar.bz2"
+        return "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$browserVersion-${getPlatform()}.tar.bz2"
     }
 
     /**
@@ -96,7 +96,7 @@ class InstallPhantomJsOnLinux extends LinuxTask {
      */
     private String getUrlOnGoogleCode() {
         return "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/phantomjs/phantomjs-" +
-                "$browserVersion-${platform}.tar.bz2"
+                "$browserVersion-${getPlatform()}.tar.bz2"
     }
 
     /**
@@ -104,7 +104,7 @@ class InstallPhantomJsOnLinux extends LinuxTask {
      *
      * @return either 'linux-x86_64' or 'linux-i686'
      */
-    String getPlatform() {
+    private String getPlatform() {
         return "linux-${is64() ? 'x86_64' : 'i686'}"
     }
 }

@@ -37,10 +37,6 @@ jacocoTestReport {
                 exclude '**/*_getToolsLocation*'
                 exclude '**/*choco*'
                 exclude '**/*Choco*'
-                exclude '**/*_closure3'
-                exclude '**/*_closure4'
-                exclude '**/*InstallIE11*'
-                exclude '**/*extractDmg*'
             }
         }.sum()
     }
@@ -57,10 +53,6 @@ test {
                 '**/*_getToolsLocation*',
                 '**/*choco*',
                 '**/*Choco*',
-                '**/*_closure3',
-                '**/*_closure4',
-                '**/*InstallIE11*',
-                '**/*extractDmg*'
         ]
     }
 }

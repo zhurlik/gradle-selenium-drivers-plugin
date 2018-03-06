@@ -2,6 +2,11 @@ package com.github.zhurlik.task
 
 import org.gradle.internal.reflect.JavaReflectionUtil
 
+/**
+ * Common methods for unit tests.
+ *
+ * @author zhurlik@gmail.com
+ */
 abstract class BaseTest {
 
     /**

@@ -2,7 +2,6 @@ package com.github.zhurlik.task
 
 import com.github.zhurlik.Basic
 import org.apache.tools.ant.taskdefs.condition.Os
-import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
@@ -16,7 +15,7 @@ import java.nio.file.Paths
  * @author zhurlik@gmail.com
  */
 class InstallChromeIntegTest extends Basic {
-    @Test(expected = GradleException)
+    @Test
     void testChromeOnLinux() {
         if (Os.isFamily(Os.FAMILY_UNIX)) {
             final Path projectPath = Paths.get(Thread.currentThread().getContextClassLoader().getResource('').path, 'test-chrome')

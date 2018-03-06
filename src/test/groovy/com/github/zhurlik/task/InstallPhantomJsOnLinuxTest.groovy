@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue
  *
  * @author zhurlik@gmail.com
  */
-class InstallPhantomJsOnLinuxTest {
+class InstallPhantomJsOnLinuxTest extends BaseTest {
 
     private Task task
 
@@ -51,7 +51,23 @@ class InstallPhantomJsOnLinuxTest {
         task.browserVersion = null
     }
 
-    private String getString(final String method) {
-        return JavaReflectionUtil.method(task, String.class, method).invoke(task)
+    @Test
+    void testGetUrlOnBitbucket() {
+        String res = getString('getUrlOnBitbucket')
+        final String platform = getString('getPlatform')
+        assertEquals("https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-null-${platform}.tar.bz2".toString(),
+                res)
+
+        task.browserVersion = '123'
+        res = getString('getUrlOnBitbucket')
+        assertEquals("https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-123-${platform}.tar.bz2".toString(),
+                res)
+        task.browserVersion = null
+    }
+
+    @Test
+    void testDownloadInstaller() {
+        String res = getString('downloadInstaller')
+
     }
 }

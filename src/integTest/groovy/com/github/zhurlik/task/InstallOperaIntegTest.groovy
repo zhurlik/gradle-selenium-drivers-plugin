@@ -2,7 +2,6 @@ package com.github.zhurlik.task
 
 import com.github.zhurlik.Basic
 import org.apache.tools.ant.taskdefs.condition.Os
-import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test

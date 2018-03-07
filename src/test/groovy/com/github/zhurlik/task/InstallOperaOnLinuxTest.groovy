@@ -5,7 +5,6 @@ import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.hamcrest.core.StringContains
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 
 import java.nio.file.Paths
@@ -75,7 +74,6 @@ class InstallOperaOnLinuxTest extends BaseTest {
     }
 
     @Test
-    @Ignore
     void testInstallBrowser() {
         task.browserVersion = '51.0.2830.40'
         invokeInstallBrowser()
@@ -84,7 +82,6 @@ class InstallOperaOnLinuxTest extends BaseTest {
     }
 
     @Test
-    @Ignore
     void testApply() {
         task.driverVersion = '2.33'
         task.browserVersion = '51.0.2830.40'

@@ -26,7 +26,7 @@ class InstallChromeOnLinuxTest extends BaseTest {
 
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-        task = project.tasks['installChrome']
+        task = project.tasks.create('testInstallChrome', InstallChromeOnLinux)
         assertNotNull(task)
     }
 

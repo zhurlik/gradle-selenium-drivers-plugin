@@ -28,7 +28,7 @@ class InstallPhantomJsOnLinuxTest extends BaseTest {
 
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-        task = project.tasks['installPhantomJs']
+        task = project.tasks.create('testInstallPhantomJs', InstallPhantomJsOnLinux)
         assertNotNull(task)
     }
 

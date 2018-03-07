@@ -55,6 +55,10 @@ test {
                 '**/*Choco*',
         ]
     }
+
+    testLogging {
+        exceptionFormat = 'full'
+    }
 }
 
 group = 'com.github.zhurlik'

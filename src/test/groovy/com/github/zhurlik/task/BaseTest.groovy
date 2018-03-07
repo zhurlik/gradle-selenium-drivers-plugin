@@ -33,4 +33,20 @@ abstract class BaseTest {
     protected void apply() {
         JavaReflectionUtil.method(task, Object.class, 'apply').invoke(task)
     }
+
+    /**
+     * Wrapper to invoke 'installDriver' method.
+     *
+     */
+    protected void invokeInstallDriver() {
+        JavaReflectionUtil.method(task, Object.class, 'installDriver').invoke(task)
+    }
+
+    /**
+     * Wrapper to invoke 'installBrowser' method.
+     *
+     */
+    protected void invokeInstallBrowser() {
+        JavaReflectionUtil.method(task, Object.class, 'installBrowser').invoke(task)
+    }
 }

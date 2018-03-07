@@ -14,30 +14,29 @@ import static org.junit.Assert.assertNotNull
 import static org.junit.Assert.assertNull
 
 /**
- * Unit tests for {@link InstallChromeOnLinux} methods that will be invoked via {@link org.gradle.internal.reflect.JavaReflectionUtil}.
+ * Unit tests for {@link InstallChromeOnMac} methods that will be invoked via {@link org.gradle.internal.reflect.JavaReflectionUtil}.
  *
  * @author zhurlik@gmail.com
  */
-class InstallChromeOnLinuxTest extends BaseTest {
-
+class InstallChromeOnMacTest extends BaseTest {
     @Before
     void setUp() throws Exception {
         final Project project = ProjectBuilder.builder().build()
 
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-        task = project.tasks.create('testInstallChrome', InstallChromeOnLinux)
+        task = project.tasks.create('testInstallChrome', InstallChromeOnMac)
         assertNotNull(task)
     }
 
     @Test
     void testGetDriverUrl() {
         String res = invoke('getDriverUrl')
-        assertEquals("https://chromedriver.storage.googleapis.com/null/chromedriver_linux64.zip".toString(), res)
+        assertEquals("https://chromedriver.storage.googleapis.com/null/chromedriver_mac64.zip".toString(), res)
 
         task.driverVersion = '1234'
         res = invoke('getDriverUrl')
-        assertEquals("https://chromedriver.storage.googleapis.com/1234/chromedriver_linux64.zip".toString(), res)
+        assertEquals("https://chromedriver.storage.googleapis.com/1234/chromedriver_mac64.zip".toString(), res)
     }
 
     @Test
@@ -48,7 +47,7 @@ class InstallChromeOnLinuxTest extends BaseTest {
     @Test
     void testInstallDriverWrong() {
         thrown.expect(BuildException)
-        thrown.expectMessage(StringContains.containsString('Can\'t get https://chromedriver.storage.googleapis.com/null/chromedriver_linux64.zip'))
+        thrown.expectMessage(StringContains.containsString('Can\'t get https://chromedriver.storage.googleapis.com/null/chromedriver_mac64.zip'))
         invokeInstallDriver()
         assertNull(System.properties['webdriver.chrome.driver'])
     }

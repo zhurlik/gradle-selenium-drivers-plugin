@@ -1,6 +1,7 @@
 package com.github.zhurlik.task
 
 import org.gradle.api.Task
+import org.gradle.internal.os.OperatingSystem
 import org.gradle.internal.reflect.JavaReflectionUtil
 import org.junit.Rule
 import org.junit.rules.ExpectedException
@@ -11,6 +12,7 @@ import org.junit.rules.ExpectedException
  * @author zhurlik@gmail.com
  */
 abstract class BaseTest {
+    private static final OperatingSystem OS = OperatingSystem.current()
     protected Task task
 
     @Rule
@@ -48,5 +50,13 @@ abstract class BaseTest {
      */
     protected void invokeInstallBrowser() {
         JavaReflectionUtil.method(task, Object.class, 'installBrowser').invoke(task)
+    }
+
+    /**
+     * When OS is Linux.
+     * @return true for Linux
+     */
+    protected boolean isLinux() {
+        OS.isLinux()
     }
 }

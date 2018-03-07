@@ -3,17 +3,12 @@ package com.github.zhurlik.task
 import org.apache.tools.ant.BuildException
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
-import org.hamcrest.core.AnyOf
-import org.hamcrest.core.Is
-import org.hamcrest.core.StringContains
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 
 import java.nio.file.Paths
 
-import static org.hamcrest.core.AnyOf.anyOf
-import static org.hamcrest.core.Is.isA
 import static org.hamcrest.core.StringContains.containsString
 import static org.junit.Assert.assertEquals
 import static org.junit.Assert.assertNotNull

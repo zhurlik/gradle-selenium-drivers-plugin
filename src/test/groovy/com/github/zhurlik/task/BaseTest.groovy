@@ -59,4 +59,12 @@ abstract class BaseTest {
     protected boolean isLinux() {
         OS.isLinux()
     }
+
+    /**
+     * When OS is Linux.
+     * @return true for Mac OS X
+     */
+    protected boolean isMac() {
+        OS.isMacOsX()()
+    }
 }

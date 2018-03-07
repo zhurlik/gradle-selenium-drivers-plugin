@@ -27,7 +27,7 @@ class InstallPhantomJsOnWindowsTest  extends BaseTest {
 
     @Test
     void testApply() {
-        if (isLinux()) {
+        if (isLinux() || isMac()) {
             try {
                 apply()
             } catch (GradleException ex) {

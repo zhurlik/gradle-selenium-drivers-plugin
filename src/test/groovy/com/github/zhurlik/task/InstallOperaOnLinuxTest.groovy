@@ -3,6 +3,8 @@ package com.github.zhurlik.task
 import org.apache.tools.ant.BuildException
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
+import org.hamcrest.core.AnyOf
+import org.hamcrest.core.Is
 import org.hamcrest.core.StringContains
 import org.junit.Before
 import org.junit.Ignore
@@ -68,8 +70,12 @@ class InstallOperaOnLinuxTest extends BaseTest {
 
     @Test
     void testInstallBrowserWrong() {
-        thrown.expect(BuildException)
-        thrown.expectMessage(StringContains.containsString('ftp://ftp.opera.com/pub/opera/desktop/null/linux/opera-stable_null_amd64.deb'))
+        thrown.expect(AnyOf.anyOf(Is.isA(BuildException), Is.isA(IllegalStateException)))
+        thrown.expectMessage(AnyOf.anyOf(
+                StringContains.containsString(
+                        'Can\'t get ftp://ftp.opera.com/pub/opera/desktop/null/linux/opera-stable_null_amd64.deb'),
+                StringContains.containsString('Not connected')
+        ))
         invokeInstallBrowser()
         assertNull(System.properties['webdriver.opera.bin'])
     }

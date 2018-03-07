@@ -3,13 +3,13 @@ package com.github.zhurlik.task
 import org.apache.tools.ant.BuildException
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
+import org.hamcrest.core.StringContains
 import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 
 import java.nio.file.Paths
 
-import static org.hamcrest.core.StringContains.containsString
 import static org.junit.Assert.assertEquals
 import static org.junit.Assert.assertNotNull
 import static org.junit.Assert.assertNull
@@ -53,7 +53,7 @@ class InstallOperaOnLinuxTest extends BaseTest {
     @Test
     void testInstallDriverWrong() {
         thrown.expect(BuildException)
-        thrown.expectMessage(containsString('https://github.com/operasoftware/operachromiumdriver/releases/download/v.null/operadriver_linux64.zip'))
+        thrown.expectMessage(StringContains.containsString('https://github.com/operasoftware/operachromiumdriver/releases/download/v.null/operadriver_linux64.zip'))
         invokeInstallDriver()
         assertNull(System.properties['webdriver.opera.driver'])
     }
@@ -68,11 +68,8 @@ class InstallOperaOnLinuxTest extends BaseTest {
 
     @Test
     void testInstallBrowserWrong() {
-//        thrown.expect(anyOf(isA(BuildException), isA(IllegalStateException)))
-//        thrown.expectMessage(anyOf(
-//                containsString( 'Can\'t get ftp://ftp.opera.com/pub/opera/desktop/null/linux/opera-stable_null_amd64.deb'),
-//                containsString('Not connected')
-//        ))
+        thrown.expect(BuildException)
+        thrown.expectMessage(StringContains.containsString('Can\'t get ftp://ftp.opera.com/pub/opera/desktop/null/linux/opera-stable_null_amd64.deb'))
         invokeInstallBrowser()
         assertNull(System.properties['webdriver.opera.bin'])
     }

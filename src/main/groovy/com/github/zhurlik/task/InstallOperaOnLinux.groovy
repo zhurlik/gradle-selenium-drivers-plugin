@@ -2,6 +2,7 @@ package com.github.zhurlik.task
 
 import com.github.zhurlik.domain.Browsers
 import com.github.zhurlik.domain.Drivers
+import org.apache.tools.ant.BuildException
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 
@@ -66,23 +67,27 @@ class InstallOperaOnLinux extends LinuxTask {
         ant.get(src: getBrowserUrl(),
                 dest: temporaryDir.path,
                 skipexisting: true,
-                verbose: true
+                verbose: true,
+                ignoreerrors: true
         )
 
         final String filename = Paths.get(new URI(getBrowserUrl()).getPath()).getFileName().toString()
         final String archive = "${temporaryDir.path}/$filename"
-        if (project.file(archive).exists()) {
-            logger.debug("Downloaded: $archive")
-            final String target = "${project.buildDir}/browser/$browser/$browserVersion"
 
-            // TODO: when deb or rpm?
-            // extracting deb file
-            extractDeb(archive, 'usr/lib/x86_64-linux-gnu/opera', target)
-            logger.quiet("$browser has been installed")
-            logger.debug("Installed to: $target")
-
-            System.properties['webdriver.opera.bin'] = "$target/opera".toString()
+        if (!project.file(archive).exists()) {
+            throw new BuildException("Can't get ${getBrowserUrl()}")
         }
+
+        logger.debug("Downloaded: $archive")
+        final String target = "${project.buildDir}/browser/$browser/$browserVersion"
+
+        // TODO: when deb or rpm?
+        // extracting deb file
+        extractDeb(archive, 'usr/lib/x86_64-linux-gnu/opera', target)
+        logger.quiet("$browser has been installed")
+        logger.debug("Installed to: $target")
+
+        System.properties['webdriver.opera.bin'] = "$target/opera".toString()
     }
 
     /**

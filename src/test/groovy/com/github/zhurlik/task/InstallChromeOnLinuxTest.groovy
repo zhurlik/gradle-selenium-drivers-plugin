@@ -33,11 +33,11 @@ class InstallChromeOnLinuxTest extends BaseTest {
     @Test
     void testGetDriverUrl() {
         String res = invoke('getDriverUrl')
-        assertEquals("https://chromedriver.storage.googleapis.com/null/chromedriver_linux64.zip".toString(), res)
+        assertEquals('https://chromedriver.storage.googleapis.com/null/chromedriver_linux64.zip', res)
 
         task.driverVersion = '1234'
         res = invoke('getDriverUrl')
-        assertEquals("https://chromedriver.storage.googleapis.com/1234/chromedriver_linux64.zip".toString(), res)
+        assertEquals('https://chromedriver.storage.googleapis.com/1234/chromedriver_linux64.zip', res)
     }
 
     @Test

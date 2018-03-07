@@ -26,7 +26,7 @@ class InstallOperaOnLinuxTest extends BaseTest {
 
         project.apply plugin: 'com.github.zhurlik.seleniumdrivers'
 
-        task = project.tasks.create('testInstallChrome', InstallOperaOnLinux)
+        task = project.tasks.create('testInstallOpera', InstallOperaOnLinux)
         assertNotNull(task)
     }
 
@@ -67,7 +67,6 @@ class InstallOperaOnLinuxTest extends BaseTest {
     }
 
     @Test
-    @Ignore
     void testInstallBrowserWrong() {
         thrown.expect(BuildException)
         thrown.expectMessage(StringContains.containsString('ftp://ftp.opera.com/pub/opera/desktop/null/linux/opera-stable_null_amd64.deb'))

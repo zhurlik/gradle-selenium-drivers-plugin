@@ -82,6 +82,18 @@ class InstallOperaOnLinuxTest extends BaseTest {
     }
 
     @Test
+    void testInstallFakeBrowser() {
+        task.browserVersion = '51.0.2830.40-fake'
+        task.project.copy {
+            from this.class.getClassLoader().getResource('opera-stable_51.0.2830.40-fake_amd64.deb')
+            into task.temporaryDir
+        }
+        invokeInstallBrowser()
+        assertEquals(Paths.get(task.project.buildDir.path, 'browser', 'OPERA', '51.0.2830.40-fake', 'opera').toString(),
+                System.properties['webdriver.opera.bin'])
+    }
+
+    @Test
     void testApply() {
         task.driverVersion = '2.33'
         task.browserVersion = '51.0.2830.40'

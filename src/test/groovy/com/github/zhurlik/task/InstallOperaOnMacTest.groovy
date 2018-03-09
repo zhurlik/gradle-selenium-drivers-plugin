@@ -55,4 +55,12 @@ class InstallOperaOnMacTest extends BaseTest {
         invokeInstallDriver()
         assertNull(System.properties['webdriver.opera.driver'])
     }
+
+    @Test
+    void testInstallBrowserWrong() {
+        thrown.expect(BuildException)
+        thrown.expectMessage(StringContains.containsString('ftp://ftp.opera.com/pub/opera/desktop/null/mac/Opera_null_Setup.dmg'))
+        invokeInstallBrowser()
+        assertNull(System.properties['webdriver.opera.bin'])
+    }
 }

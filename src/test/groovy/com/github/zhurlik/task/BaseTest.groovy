@@ -65,6 +65,15 @@ abstract class BaseTest {
      * @return true for Mac OS X
      */
     protected boolean isMac() {
-        OS.isMacOsX()()
+        OS.isMacOsX()
+    }
+
+    /**
+     *  Is 64 or 32 bit system.
+     *
+     * @return true when 64 bit system
+     */
+    protected boolean is64() {
+        return isMac() || OS.getNativePrefix().contains('64')
     }
 }

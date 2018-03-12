@@ -7,6 +7,8 @@ import org.hamcrest.core.StringContains
 import org.junit.Before
 import org.junit.Test
 
+import static org.hamcrest.core.AnyOf.anyOf
+import static org.hamcrest.core.Is.isA
 import static org.junit.Assert.assertEquals
 import static org.junit.Assert.assertNotNull
 import static org.junit.Assert.assertNull
@@ -58,8 +60,13 @@ class InstallOperaOnMacTest extends BaseTest {
 
     @Test
     void testInstallBrowserWrong() {
-        thrown.expect(BuildException)
-        thrown.expectMessage(StringContains.containsString('ftp://ftp.opera.com/pub/opera/desktop/null/mac/Opera_null_Setup.dmg'))
+        thrown.expect(anyOf(isA(BuildException)), isA(NoSuchElementException))
+        thrown.expectMessage(
+                anyOf(
+                        StringContains.containsString('ftp://ftp.opera.com/pub/opera/desktop/null/mac/Opera_null_Setup.dmg'),
+                        StringContains.containsString('Cannot access last() element from an empty List')
+                )
+        )
         invokeInstallBrowser()
         assertNull(System.properties['webdriver.opera.bin'])
     }

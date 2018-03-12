@@ -60,7 +60,7 @@ class InstallOperaOnMacTest extends BaseTest {
 
     @Test
     void testInstallBrowserWrong() {
-        thrown.expect(anyOf(isA(BuildException)), isA(NoSuchElementException))
+        thrown.expect(anyOf(isA(BuildException), isA(NoSuchElementException)))
         thrown.expectMessage(
                 anyOf(
                         StringContains.containsString('ftp://ftp.opera.com/pub/opera/desktop/null/mac/Opera_null_Setup.dmg'),
